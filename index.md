@@ -48,19 +48,29 @@ For your second milestone, explain what you've worked on since your previous mil
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CaCazFBhYKs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-  The goal of my first milestone was to allow the flex sensor and accelerometer to retrieve data, and display it on the serial monitor. I encountered numerous issues while building and coding my first milestone.
-  I started by building the circuit for my flex sensor. I used the big Arduino Elegoo microprocessor to begin with. I plugged the corresponding wires into power and ground, and also used a 10K ohm resistor to make sure the circuit didn't explode. I also had to use voltage dividers, and I learned that you can find out which ohm resistor to use using the formula Vout = (R2 / (R1 + R2)) * Vin. Becuase I need to analyze and print data from the flex sensor, there was a specific range of pins I could use. On the Arduino Elegoo microprocessor, these pins ranged only from A0 --> A15. I plugged all the corresponding wires and created a working circuit.
-  After testing it on the Arduino Elegoo microprocessor with a code, I decided to transfer the circuit onto the actual microprocessor I would be using for the knee rehab device, which was the Arduino Wroom ESP32. However, when I did that, I encountered numerous issues. 
-  I started by trying to fix my code. Although there were no errors, I thought that I may have defined a port incorrectly, or forgot to include certain libraries. Also, because the Arduino Wroom ESP32 has different pin numbers than the Arduino Elegoo, I had to use a pinout to determine which pin A0 corresponded to in the Arduino Wroom ESP32. I figured out that the pins containing the letter 'D' worked. However, even after changing the pin number on the code, the sensor was still unable to detect values. The only numbers in the serial monitor were either 0s or 4095s. Therefore, after determining that the code was not incorrect, I decided to change my approach and examine my circuit. Upon my examination, I realized that I had made a frivolous blunder; instead of using the 10K ohm resistor, I accidently used a 220 ohm resistor instead! Because there was not enough resistance, the flex sensor could not send any data to the serial monitor. 
-  My next mini-goal was to detect and send values into the serial monitor from the accelerometer. Instead of hooking of the circuits on the Arduino Elegoo microprocessor, I decided to directly wire the circuits onto the Arduino Wroom ESP32. Getting the circuit to work was relatively simple, since no resistors were necessary. I had some trouble with the code, however. On one of the lines, I was telling the computer it was failing to retreive data when in reality, it was actually succeeding. Therefore, despite the fact that the acceleromter was working, the computer was stopping the program before the accelerometer could send data. \
-  For my second milestone, I intend on adding bluetooth so an app on a phone can retrieve data values. I also intend on adding a power bank, so I don't need to continously plug my device into my computer for it to work. Finally, I need to attach the device onto a knee brace so i can accuratley detect values
-  
+The goal of my first milestone was to get the flex sensor and accelerometer to successfully collect data and display it on the serial monitor. Throughout the process, I encountered several challenges related to both circuit building and coding.
+
+I began by assembling the circuit for the flex sensor using the larger Arduino Elegoo microcontroller. I connected the appropriate wires to power and ground and used a 10K ohm resistor to prevent short circuits. I also implemented a voltage divider, learning along the way that the resistor values could be calculated using the formula:
+Vout = (R2 / (R1 + R2)) * Vin.
+
+Since I needed to read data from the flex sensor, I had to use analog pins on the Elegoo board, which range from A0 to A15. After carefully wiring everything, I successfully created a working circuit.
+
+Once the flex sensor functioned properly on the Elegoo board, I transferred the circuit to the microcontroller intended for the final knee rehab device—the Arduino Wroom ESP32. However, I ran into several issues.
+
+I first assumed the problem was in the code. Even though there were no compilation errors, I suspected I had incorrectly defined a port or missed an essential library. Because the ESP32 has different pin configurations than the Elegoo board, I consulted a pinout diagram to determine the ESP32 equivalent of A0. I found that pins labeled with a ‘D’ worked, but even after updating the code, the serial monitor only displayed constant values—either 0 or 4095—which indicated a problem with input readings.
+
+After confirming that the code was not the issue, I re-examined the circuit. That’s when I realized I had made a simple but critical mistake: I had used a 220 ohm resistor instead of the required 10K ohm resistor. This insufficient resistance prevented the flex sensor from transmitting accurate data.
+
+Next, I turned to the accelerometer. This time, I decided to connect it directly to the ESP32 instead of prototyping on the Elegoo board first. The hardware setup was easier—no resistors were needed—but I faced a small coding issue. One line of code was incorrectly signaling a data retrieval failure, even though the accelerometer was working. As a result, the program halted before the data could be transmitted to the serial monitor.
+
+For my second milestone, I plan to: 1) Integrate Bluetooth functionality so data can be sent to a mobile app, 2) Add a power bank to eliminate the need to keep the device plugged into a computer, 3) Mount the device onto a knee brace to begin collecting accurate movement data in a real-world setup.
+```  
 For your first milestone, describe what your project is and how you plan to build it. You can include:
 - An explanation about the different components of your project and how they will all integrate together
 - Technical progress you've made so far
 - Challenges you're facing and solving in your future milestones
 - What your plan is to complete your project
-
+```
 # Schematics 
 ```Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. ```
 <img width="508" alt="Screen Shot 2025-06-20 at 3 33 19 PM" src="https://github.com/user-attachments/assets/6695df6b-a969-4e7e-b170-94c6fcf848ff" />
