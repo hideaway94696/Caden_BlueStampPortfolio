@@ -1,4 +1,4 @@
-<img width="508" alt="Screen Shot 2025-06-20 at 3 26 48 PM" src="https://github.com/user-attachments/assets/6b443033-006c-4b56-9564-ca08f3832369" /># Knee Rehabilitation Device
+# Knee Rehabilitation Device
 
 The Knee Rehabilitation Device is a wearable system designed to assist patients recovering from knee injuries or surgeries by tracking joint movement and providing real-time feedback through the use of buzzers and LEDs. It has numerous integrated sensors, and can be used in both clinical settings and at home. One of the biggest challenges I faced during this project was ensuring the sensors were retrieving accurate data.
 ```
@@ -44,7 +44,7 @@ For your second milestone, explain what you've worked on since your previous mil
 ```
 # First Milestone
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
+```**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**```
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CaCazFBhYKs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
