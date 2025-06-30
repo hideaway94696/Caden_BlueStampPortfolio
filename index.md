@@ -96,7 +96,7 @@ For your first milestone, describe what your project is and how you plan to buil
 <img width="508" alt="Screen Shot 2025-06-20 at 3 33 19 PM" src="https://github.com/user-attachments/assets/6695df6b-a969-4e7e-b170-94c6fcf848ff" />
 
 # Code
-
+```
 #include <Adafruit_LSM6DS33.h>
 #include <BleSerial.h>
 // For SPI mode, we need a CS pin
@@ -322,7 +322,7 @@ void loop() {
   // Serial.println();
   //  delayMicroseconds(10000);
 }
-
+```
 ```
 # Bill of Materials
 Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
