@@ -39,6 +39,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 ```
 # Schematics
 ![image](https://github.com/user-attachments/assets/e0ed54cf-292d-4fa4-9275-32e36ba7ce25)
+Figure 2: Flex Sensor detached from breadboard but still connected. Accelerometer attached and wired to breadboard.
 ```
 ```
 The goal of my second milestone was to attach all the major components onto the knee brace. Throughout the process, I encountered a number of technical challenges that required troubleshooting and iterative problem-solving.
@@ -46,6 +47,11 @@ The goal of my second milestone was to attach all the major components onto the 
 I began by soldering the headers onto the accelerometer. During this process, I accidentally created several short circuits, which interfered with the functionality of the accelerometer. To fix this, I had to carefully desolder the connections and try again. After some difficulty, I successfully soldered the headers, allowing me to mount the accelerometer onto the breadboard.
 
 I also learned how an accelerometer works. The Adafruit LSM6DS33 Accelerometer contains an extremely small mass and spring in order to determine acceleration in all three axes. Because F = m * a (Newton's Second Law) and F = k * x (Hooke's Law), we can find out acceleration by substituting F for F, making m * a = k * x. Since m (mass), k (spring constant), and x (displacement of the spring from equilibrium position) are all known, we can find out acceleration by rearranging the equation to become: a = (k * x)/(m). 
+![image](https://github.com/user-attachments/assets/bc02a42b-5f1c-45a7-a9d1-817c68676eaf)
+
+Furthermore, I decided to analyze how a flex sensor functions (because Kevin told me to). A flex sensor functions as a variable resistor, meaning its electrical resistance changes in response to bending. When the sensor is straight, it maintains a lower resistance. As it bends, the resistance increases proportionally to the degree of flexion. This change occurs due to conductive ink particles embedded in the sensor; as the sensor bends, these particles move further apart, resulting in higher resistance. 
+![image](https://github.com/user-attachments/assets/112043ec-faf5-45d9-b650-129286a9d6b8)
+
 
 With the accelerometer working, I turned my attention to the flex sensor. I needed to detach it from the breadboard while maintaining a stable electrical connection. To achieve this, I soldered wires directly to the sensor and then reconnected it to the breadboard. I tested the setup to ensure the sensor could accurately retrieve and display data on the serial monitor, which it initially did.
 
@@ -94,6 +100,8 @@ For your first milestone, describe what your project is and how you plan to buil
 # Schematics 
 ```Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. ```
 <img width="508" alt="Screen Shot 2025-06-20 at 3 33 19 PM" src="https://github.com/user-attachments/assets/6695df6b-a969-4e7e-b170-94c6fcf848ff" />
+
+Figure 1: Flex Sensor and Accelerometer wired/connected to breadboard and Arduino ESP32. 
 
 # Code
 ```
