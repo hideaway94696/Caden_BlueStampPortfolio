@@ -39,7 +39,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 # Code
 Refer to Appendix (Milestone 2 Code)
 
-```
+
 # Schematics
 ![image](https://github.com/user-attachments/assets/e0ed54cf-292d-4fa4-9275-32e36ba7ce25)
 Figure 2: Flex Sensor detached from breadboard but still connected. Accelerometer attached and wired to breadboard.
