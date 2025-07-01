@@ -32,6 +32,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 Figure 2: Flex Sensor detached from breadboard but still connected. Accelerometer attached and wired to breadboard.
 
 
+
 The goal of my second milestone was to attach all the major components onto the knee brace. Throughout the process, I encountered a number of technical challenges that required troubleshooting and iterative problem-solving.
 
 I began by soldering the headers onto the accelerometer. During this process, I accidentally created several short circuits, which interfered with the functionality of the accelerometer. To fix this, I had to carefully desolder the connections and try again. After some difficulty, I successfully soldered the headers, allowing me to mount the accelerometer onto the breadboard.
@@ -60,10 +61,10 @@ For my third milestone, I plan to: 1) Tune the output values of the flex sensor 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/YUhANFDKLhA" title="Caden Y. Milestone 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 # Schematics 
-```Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. ```
 <img width="508" alt="Screen Shot 2025-06-20 at 3 33 19 PM" src="https://github.com/user-attachments/assets/6695df6b-a969-4e7e-b170-94c6fcf848ff" />
 
 Figure 1: Flex Sensor and Accelerometer wired/connected to breadboard and Arduino ESP32. 
+
 
 
 The goal of my first milestone was to get the flex sensor and accelerometer to successfully collect data and display it on the serial monitor. Throughout the process, I encountered several challenges related to both circuit building and coding.
