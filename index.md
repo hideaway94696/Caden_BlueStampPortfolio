@@ -73,8 +73,6 @@ For your second milestone, explain what you've worked on since your previous mil
 ```
 # First Milestone
 
-```**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**```
-
 <iframe width="736" height="414" src="https://www.youtube.com/embed/YUhANFDKLhA" title="Caden Y. Milestone 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 The goal of my first milestone was to get the flex sensor and accelerometer to successfully collect data and display it on the serial monitor. Throughout the process, I encountered several challenges related to both circuit building and coding.
@@ -109,8 +107,9 @@ Figure 1: Flex Sensor and Accelerometer wired/connected to breadboard and Arduin
 # Code
 Refer to Appendix (Milestone 1 Code) 
 
-```
+
 # Bill of Materials
+```
 Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
 Don't forget to place the link of where to buy each component inside the quotation marks in the corresponding row after href =. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize this to your project needs. 
 
