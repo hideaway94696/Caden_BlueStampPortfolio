@@ -1,23 +1,17 @@
 # Knee Rehabilitation Device
 
 The Knee Rehabilitation Device is a wearable system designed to assist patients recovering from knee injuries or surgeries by tracking joint movement and providing real-time feedback through the use of buzzers and LEDs. It has numerous integrated sensors, and can be used in both clinical settings and at home. One of the biggest challenges I faced during this project was ensuring the sensors were retrieving accurate data.
-```
-You should comment out all portions of your portfolio that you have not completed yet, as well as any instructions:
-```HTML 
-<!--- This is an HTML comment in Markdown -->
-<!--- Anything between these symbols will not render on the published site -->
 
-```
-| **Engineer** | **School** | **Area of Interest** | **Grade** |
-|:--:|:--:|:--:|:--:|
-| Caden Y | Mission San Jose High School | Mechanical Engineering | Incoming Sophomore
+| Caden Y | Mission San Jose High School | Mechanical Engineering | Incoming Sophomore |
+
 ```
 **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
 
 ![Headstone Image](logo.svg)
-  
-# Final Milestone
 
+```  
+# Final Milestone
+```
 **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -27,34 +21,28 @@ For your final milestone, explain the outcome of your project. Key details to in
 - What your biggest challenges and triumphs were at BSE
 - A summary of key topics you learned about
 - What you hope to learn in the future after everything you've learned at BSE
-
-
 ```
+
 # Second Milestone
-```
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/y3VAmNlER5Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-```
-# Code
-Refer to Appendix (Milestone 2 Code)
-
+<iframe width="743" height="418" src="https://www.youtube.com/embed/2_FaPk_xcjo" title="Caden Y. Milestone 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 # Schematics
 ![image](https://github.com/user-attachments/assets/e0ed54cf-292d-4fa4-9275-32e36ba7ce25)
 Figure 2: Flex Sensor detached from breadboard but still connected. Accelerometer attached and wired to breadboard.
-```
-```
+
+
 The goal of my second milestone was to attach all the major components onto the knee brace. Throughout the process, I encountered a number of technical challenges that required troubleshooting and iterative problem-solving.
 
 I began by soldering the headers onto the accelerometer. During this process, I accidentally created several short circuits, which interfered with the functionality of the accelerometer. To fix this, I had to carefully desolder the connections and try again. After some difficulty, I successfully soldered the headers, allowing me to mount the accelerometer onto the breadboard.
 
 I also learned how an accelerometer works. The Adafruit LSM6DS33 Accelerometer contains an extremely small mass and spring in order to determine acceleration in all three axes. Because F = m * a (Newton's Second Law) and F = k * x (Hooke's Law), we can find out acceleration by substituting F for F, making m * a = k * x. Since m (mass), k (spring constant), and x (displacement of the spring from equilibrium position) are all known, we can find out acceleration by rearranging the equation to become: a = (k * x)/(m). The damper effectively minimizes vibrations to ensure the entire accelerometer doesn't vibrate indefinitely.
 ![image](https://github.com/user-attachments/assets/bc02a42b-5f1c-45a7-a9d1-817c68676eaf)
+Figure 2A: Adafruit LSM6DS33 Accelerometer Schematic
 
 Furthermore, I decided to analyze how a flex sensor functions (because Kevin told me to). A flex sensor functions as a variable resistor, meaning its electrical resistance changes in response to bending. When the sensor is straight, it maintains a lower resistance. As it bends, the resistance increases proportionally to the degree of flexion. This change occurs due to conductive ink particles embedded in the sensor; as the sensor bends, these particles move further apart, resulting in higher resistance. 
 ![image](https://github.com/user-attachments/assets/112043ec-faf5-45d9-b650-129286a9d6b8)
-
+Figure 2B: How a Flex Sensor Functions
 
 With the accelerometer working, I turned my attention to the flex sensor. I needed to detach it from the breadboard while maintaining a stable electrical connection. To achieve this, I soldered wires directly to the sensor and then reconnected it to the breadboard. I tested the setup to ensure the sensor could accurately retrieve and display data on the serial monitor, which it initially did.
 
@@ -62,18 +50,21 @@ However, after leaving the project for a week, the flex sensor stopped working p
 
 I reviewed my circuit against the schematics and confirmed all the wiring was correct. I also used a multimeter to test my soldered connections — all of which were intact. Upon closer inspection, I noticed that a key metal contact on the flex sensor had become bent and detached from the plastic housing. I replaced the damaged sensor with a new one, which resolved the issue immediately.
 
+Another part of my second milestone was to incorporate a buzzer that will beep when a certain value from the accelerometer or flex sensor is detected. Refer to the Appendix (Milestone 2 Code) to see my implementation of an if-else statement that activated the buzzer when necessary.
+
 For my third milestone, I plan to: 1) Tune the output values of the flex sensor and accelerometer for accuracy, 2) Attach the power bank to make the device portable. At this stage, I can't transfer the circuit on the breadboard to the PCB or sew the device onto the knee brace, as doing so would make the setup permanent. I need to leave room for further modifications before finalizing the build.
 
-```
-For your second milestone, explain what you've worked on since your previous milestone. You can highlight:
-- Technical details of what you've accomplished and how they contribute to the final goal
-- What has been surprising about the project so far
-- Previous challenges you faced that you overcame
-- What needs to be completed before your final milestone 
-```
+
 # First Milestone
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/YUhANFDKLhA" title="Caden Y. Milestone 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+# Schematics 
+```Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. ```
+<img width="508" alt="Screen Shot 2025-06-20 at 3 33 19 PM" src="https://github.com/user-attachments/assets/6695df6b-a969-4e7e-b170-94c6fcf848ff" />
+
+Figure 1: Flex Sensor and Accelerometer wired/connected to breadboard and Arduino ESP32. 
+
 
 The goal of my first milestone was to get the flex sensor and accelerometer to successfully collect data and display it on the serial monitor. Throughout the process, I encountered several challenges related to both circuit building and coding.
 
@@ -88,25 +79,9 @@ I first assumed the problem was in the code. Even though there were no compilati
 
 After confirming that the code was not the issue, I re-examined the circuit. That’s when I realized I had made a simple but critical mistake: I had used a 220 ohm resistor instead of the required 10K ohm resistor. This insufficient resistance prevented the flex sensor from transmitting accurate data.
 
-Next, I turned to the accelerometer. This time, I decided to connect it directly to the ESP32 instead of prototyping on the Elegoo board first. The hardware setup was easier—no resistors were needed—but I faced a small coding issue. One line of code was incorrectly signaling a data retrieval failure, even though the accelerometer was working. As a result, the program halted before the data could be transmitted to the serial monitor.
+Next, I turned to the accelerometer. This time, I decided to connect it directly to the ESP32 instead of prototyping on the Elegoo board first. The hardware setup was easier since no resistors were needed, but I faced a small coding issue. One line of code was incorrectly signaling a data retrieval failure, even though the accelerometer was working. As a result, the program halted before the data could be transmitted to the serial monitor. Refer to the Appendix (Milestone 1 Code) to see how I resolved this issue.
 
 For my second milestone, I plan to: 1) Integrate Bluetooth functionality so data can be sent to a mobile app, 2) Add a power bank to eliminate the need to keep the device plugged into a computer, 3) Mount the device onto a knee brace to begin collecting accurate movement data in a real-world setup.
-```  
-For your first milestone, describe what your project is and how you plan to build it. You can include:
-- An explanation about the different components of your project and how they will all integrate together
-- Technical progress you've made so far
-- Challenges you're facing and solving in your future milestones
-- What your plan is to complete your project
-```
-# Schematics 
-```Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. ```
-<img width="508" alt="Screen Shot 2025-06-20 at 3 33 19 PM" src="https://github.com/user-attachments/assets/6695df6b-a969-4e7e-b170-94c6fcf848ff" />
-
-Figure 1: Flex Sensor and Accelerometer wired/connected to breadboard and Arduino ESP32. 
-
-# Code
-Refer to Appendix (Milestone 1 Code) 
-
 
 # Bill of Materials
 ```
