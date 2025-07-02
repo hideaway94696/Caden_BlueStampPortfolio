@@ -30,9 +30,10 @@ For your final milestone, explain the outcome of your project. Key details to in
 Figure 2: Flex Sensor detached from breadboard but still connected. Accelerometer attached and wired to breadboard.
 
 
+# Description
+The goal of my second milestone was to attach all the major components onto the knee brace and add a buzzer that beeps when certain values are detected. As of now, when flex sensor values reach over 3200, the buzzer will release short beeps that indicate the desired squat angle has been reached. Additionally, when the acceleration (in the x-axis) is under zero, the buzzer will release a long beep until acceleration is nonnegative. None of these values are properly tuned, though, so I'll need to spend some time enhancing the accuracy of the device. Throughout the process of finishing my second milestone, I encountered a number of technical challenges that required troubleshooting and iterative problem-solving.
 
-The goal of my second milestone was to attach all the major components onto the knee brace. Throughout the process, I encountered a number of technical challenges that required troubleshooting and iterative problem-solving.
-
+# Challenges
 I began by soldering the headers onto the accelerometer. During this process, I accidentally created several short circuits, which interfered with the functionality of the accelerometer. To fix this, I had to carefully desolder the connections and try again. After some difficulty, I successfully soldered the headers, allowing me to mount the accelerometer onto the breadboard.
 
 I also learned how an accelerometer works. The Adafruit LSM6DS33 Accelerometer contains an extremely small mass and spring in order to determine acceleration in all three axes. Because F = m * a (Newton's Second Law) and F = k * x (Hooke's Law), we can find out acceleration by substituting F for F, making m * a = k * x. Since m (mass), k (spring constant), and x (displacement of the spring from equilibrium position) are all known, we can find out acceleration by rearranging the equation to become: a = (k * x)/(m). The damper effectively minimizes vibrations to ensure the entire accelerometer doesn't vibrate indefinitely.
@@ -60,13 +61,13 @@ For my third milestone, I plan to: 1) Tune the output values of the flex sensor 
 
 # Schematics 
 <img width="508" alt="Screen Shot 2025-06-20 at 3 33 19 PM" src="https://github.com/user-attachments/assets/6695df6b-a969-4e7e-b170-94c6fcf848ff" />
-
 Figure 1: Flex Sensor and Accelerometer wired/connected to breadboard and Arduino ESP32. 
 
 
+# Description
+The goal of my first milestone was to get the flex sensor and accelerometer to successfully collect data and display it on the serial monitor. As of now, whenever the flex sensor detects bending/resistance, it will display the corresponding values in the serial monitor under "Flex Sensor Values". Additionally, whenever the accelerometer detects acceleration along the x, y, or z axes, it will display the corresponding values of acceleration in the serial monitor under "Acceleration x: --  y: --  z: --". Throughout the process of finishing my first milestone, I encountered several challenges related to both circuit building and coding.
 
-The goal of my first milestone was to get the flex sensor and accelerometer to successfully collect data and display it on the serial monitor. Throughout the process, I encountered several challenges related to both circuit building and coding.
-
+# Challenges
 I began by assembling the circuit for the flex sensor using the larger Arduino Elegoo microcontroller. I connected the appropriate wires to power and ground and used a 10K ohm resistor to prevent short circuits. I also implemented a voltage divider, learning along the way that the resistor values could be calculated using the formula:
 Vout = (R2 / (R1 + R2)) * Vin.
 
