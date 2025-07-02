@@ -27,6 +27,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 # Schematics
 ![image](https://github.com/user-attachments/assets/e0ed54cf-292d-4fa4-9275-32e36ba7ce25)
+
 Figure 2: Flex Sensor detached from breadboard but still connected. Accelerometer attached and wired to breadboard.
 
 
@@ -62,6 +63,7 @@ For my third milestone, I plan to: 1) Tune the output values of the flex sensor 
 
 # Schematics 
 <img width="508" alt="Screen Shot 2025-06-20 at 3 33 19 PM" src="https://github.com/user-attachments/assets/6695df6b-a969-4e7e-b170-94c6fcf848ff" />
+
 Figure 1: Flex Sensor and Accelerometer wired/connected to breadboard and Arduino ESP32. 
 
 
