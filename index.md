@@ -52,6 +52,7 @@ I reviewed my circuit against the schematics and confirmed all the wiring was co
 
 Another part of my second milestone was to incorporate a buzzer that will beep when a certain value from the accelerometer or flex sensor is detected. Refer to the Appendix (Milestone 2 Code) to see my implementation of an if-else statement that activated the buzzer when necessary.
 
+# Next Steps
 For my third milestone, I plan to: 1) Tune the output values of the flex sensor and accelerometer for accuracy, 2) Attach the power bank to make the device portable. At this stage, I can't transfer the circuit on the breadboard to the PCB or sew the device onto the knee brace, as doing so would make the setup permanent. I need to leave room for further modifications before finalizing the build.
 
 
@@ -81,6 +82,7 @@ After confirming that the code was not the issue, I re-examined the circuit. Tha
 
 Next, I turned to the accelerometer. This time, I decided to connect it directly to the ESP32 instead of prototyping on the Elegoo board first. The hardware setup was easier since no resistors were needed, but I faced a small coding issue. One line of code was incorrectly signaling a data retrieval failure, even though the accelerometer was working. As a result, the program halted before the data could be transmitted to the serial monitor. Refer to the Appendix (Milestone 1 Code) to see how I resolved this issue.
 
+# Next Steps
 For my second milestone, I plan to: 1) Integrate Bluetooth functionality so data can be sent to a mobile app, 2) Add a power bank to eliminate the need to keep the device plugged into a computer, 3) Mount the device onto a knee brace to begin collecting accurate movement data in a real-world setup.
 
 # Bill of Materials
@@ -113,7 +115,7 @@ For my BlueStamp starter project, I chose to build RGB sliders. RGB sliders allo
 # Challenges
 I encountered several challenges while building the RGB sliders, even though the project was relatively simple compared to other starter options. One issue I faced was ensuring the correct polarity of the LED lights. Typically, the longer leg of an LED indicates the positive side, but in this case, it corresponded to the negative. I had to be very careful not to get it wrong, since a mistake would require me to de-solder and reattach the LED entirely. Another obstacle was accidentally melting the plastic while soldering. Since it was my first time using a soldering iron, I had trouble applying it efficiently, which led to the plastic being exposed to high temperatures for too long. This weakened the structure of the project slightly, but thankfully it didn’t cause any major functional problems.
 
-Next Steps - 
+# Next Steps 
 After finishing my starter project, I intend on refining my Arduino skills to ensure that building my intensive project will be easier. I also hope to finish my first milestone by the next few days. 
 
 # Appendix
