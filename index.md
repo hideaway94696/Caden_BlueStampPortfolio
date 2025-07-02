@@ -41,7 +41,7 @@ I also learned how an accelerometer works. The Adafruit LSM6DS33 Accelerometer c
 ![image](https://github.com/user-attachments/assets/bc02a42b-5f1c-45a7-a9d1-817c68676eaf)
 Figure 2A: Adafruit LSM6DS33 Accelerometer Schematic
 
-Furthermore, I decided to analyze how a flex sensor functions (because Kevin told me to). A flex sensor functions as a variable resistor, meaning its electrical resistance changes in response to bending. When the sensor is straight, it maintains a lower resistance. As it bends, the resistance increases proportionally to the degree of flexion. This change occurs due to conductive ink particles embedded in the sensor; as the sensor bends, these particles move further apart, resulting in higher resistance. 
+Furthermore, I decided to analyze how a flex sensor functions. A flex sensor functions as a variable resistor, meaning its electrical resistance changes in response to bending. When the sensor is straight, it maintains a lower resistance. As it bends, the resistance increases proportionally to the degree of flexion. This change occurs due to conductive ink particles embedded in the sensor; as the sensor bends, these particles move further apart, resulting in higher resistance. 
 ![image](https://github.com/user-attachments/assets/112043ec-faf5-45d9-b650-129286a9d6b8)
 Figure 2B: How a Flex Sensor Functions
 
