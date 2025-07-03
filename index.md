@@ -2,6 +2,8 @@
 
 The Knee Rehabilitation Device is a wearable system designed to assist patients recovering from knee injuries or surgeries by tracking joint movement and providing real-time feedback through the use of buzzers and LEDs. It has numerous integrated sensors, and can be used in both clinical settings and at home. One of the biggest challenges I faced during this project was ensuring the sensors were retrieving accurate data.
 
+| **Name** | **School** | **Area of Interest** | **Grade** |
+|:--:|:--:|:--:|:--:|
 | Caden Y | Mission San Jose High School | Mechanical Engineering | Incoming Sophomore |
 
 <!-- **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
