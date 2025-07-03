@@ -91,6 +91,7 @@ For my second milestone, I plan to: 1) Integrate Bluetooth functionality so data
 
 
 # Bill of Materials
+
 | **Part** | **Note** | **Price** | **Link** |
 |:--:|:--:|:--:|:--:|
 | **Arduino ESP32S** | **Microcontroller** | **$13** | <a href ="https://www.amazon.com/Teyleten-Robot-ESP-WROOM-32-Development-Microcontroller/dp/B08246MCL5/ref=sr_1_10?crid=2D7JWTV607DLJ&dib=eyJ2IjoiMSJ9.muXyANMuy8-oE8Y74H25ZmbeUH4QVoqL4p3vOP7PNHiBTcD3JF0f6YN8ckv2KkCEOtjdM6pcU0Zd_eBIr7_sHSmSaozJEn_rDNaMAMh2QyJKdVaUYd-7KufZomvs7MwoBqc18GN4M95rCLYntJ485_MPH3aN3ksSaCAkH1stHUrgqq8ASKqi2s5Xjg1l75sKwzfVeLzZnyxOK1JrIkbL8Npos_fdM1NpA__gRTq6kdXxYmj0mxAwh5BRkrR_VIFc_-eJR1XljSUyVyT_LzFsC_ZAboFgOV0wgP2vWe0FNQI.qmVWK2VUk1ZviU20HVRBNOdTnmbUm3B8zNGwGf7xcwc&dib_tag=se&keywords=arduino%2Besp32&qid=1751557896&s=electronics&sprefix=arduino%2Besp32%2Celectronics%2C228&sr=1-10&th=1"> Link </a> |
