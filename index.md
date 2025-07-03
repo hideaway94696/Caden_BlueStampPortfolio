@@ -19,11 +19,17 @@ For my final milestone, the device must function properly, meaning it is able to
 One major obstacle I had to overcome was the placement of the accelerometer. I realized that placing the accelerometer on the breadboard was not the best idea, since the accelerometer provided little to no data. This is because I placed the breadboard on an area (on the knee brace) that moves very little, meaning the accelerometer is exposed to little to no movement as well. To solve this issue, I had to remove the accelerometer from the breadboard and figure out an optimal placement for the accelerometer. The first step to overcoming this obstacle was to desolder the headers from the accelerometer. However, because the desoldering pump could not fully remove all the solder from the accelerometer, I was left with no option but to snip the headers off the accelerometer. The next step was to determine an optimal placement for the accelerometer. After doing some research, I realized that placing the accelerometer near the upper thigh would be most helpful for my project (refer to Figure 3A to see the positions of accelerometers on a knee rehab device). The reason why I chose to place the accelerometer on the upper thigh was primarily because the knee brace did not extend all the way to the calf. The final step was learning how to sew. An amazing instructor taught me the basics of a running stitch, which was necessary to sew the accelerometer on the knee brace.
 
 To tune the values for the device, I needed to analyze the graphs of numerous proper squats (refer to Figure 3B to see a chart displaying values for 'good' squats) and do the same for improper squats (refer to Figure 3C to see a chart displaying values for 'bad' squats). 
+
 ![image](https://github.com/user-attachments/assets/df5b3892-76a6-4d6e-a23a-15c9766d811c)
+
 Figure 3A: Possible placements of accelerometers on a knee rehab device (thigh and calf). 
+
 ![image](https://github.com/user-attachments/assets/fbe8d34a-06c9-424f-a469-a362e45388d8)
+
 Figure 3B: Graph displaying data values for 6 'proper' squats
+
 ![image](https://github.com/user-attachments/assets/4de42f7b-8676-4f2c-b836-cd6f68030c06)
+
 Figure 3C: Graph displaying data values for an 'improper' squats
 
 Another important aspect of my project was understanding how pitch, roll, and yaw work. Pitch, yaw, and roll are terms describing rotations of an object around three perpendicular axes: the longitudinal (roll), lateral (pitch), and vertical (yaw) axes. To visualize pitch, think of an airplane tilting its nose up and down. To visualize roll, think of an airplane banking/tilting sideways. To visualize yaw, think of an airplane turning left/right (refer to Figure 3D to see pitch, roll, and yaw).
