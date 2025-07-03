@@ -11,6 +11,13 @@ The Knee Rehabilitation Device is a wearable system designed to assist patients 
 ![Headstone Image](logo.svg) -->
 
 # Final Milestone
+##Description
+For my final milestone, the device must function properly, meaning it is able to track incorrect squat form and beep when it is detected. If the user reaches the proper angle of a squat, the buzzer should also be able to beep. Because of these specific conditions, I met numerous challenges while finishing the project.
+##Challenges
+One major obstacle I had to overcome was the placement of the accelerometer. I realized that placing the accelerometer on the breadboard was not the best idea, since the accelerometer provided little to no data. This is because I placed the breadboard on an area (on the knee brace) that moves very little, meaning the accelerometer is exposed to little to no movement as well. To solve this issue, I had to remove the accelerometer from the breadboard and figure out an optimal placement for the accelerometer. The first step to overcoming this obstacle was to desolder the headers from the accelerometer. However, because the desoldering pump could not fully remove all the solder from the accelerometer, I was left with no option but to snip the headers off the accelerometer. The next step was to determine an optimal placement for the accelerometer. After doing some research, I realized that placing the accelerometer near the upper thigh would be most helpful for my project (refer to Figure 3A to see the positions of accelerometers on a knee rehab device). The reason why I chose to place the accelerometer on the upper thigh was primarily because the knee brace did not extend all the way to the calf. The final step was learning how to sew. An amazing instructor taught me the basics of a running stitch, which was neccessary to sew the accelerometer on the knee brace.
+
+![image](https://github.com/user-attachments/assets/df5b3892-76a6-4d6e-a23a-15c9766d811c)
+Figure 3A: Possible placements of accelerometers on a knee rehab device (thigh and calf). 
 
 <!-- **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
@@ -46,6 +53,10 @@ Figure 2A: Adafruit LSM6DS33 Accelerometer Schematic
 Furthermore, I decided to analyze how a flex sensor functions. A flex sensor functions as a variable resistor, meaning its electrical resistance changes in response to bending. When the sensor is straight, it maintains a lower resistance. As it bends, the resistance increases proportionally to the degree of flexion (refer to Figure 2B). This change occurs due to conductive ink particles embedded in the sensor; as the sensor bends, these particles move further apart, resulting in higher resistance. 
 ![image](https://github.com/user-attachments/assets/112043ec-faf5-45d9-b650-129286a9d6b8)
 Figure 2B: How a Flex Sensor Functions
+
+Because the buzzer was a necessary part of my second milestone, I needed to understand how a piezo buzzer functioned. After doing some research, I was able to figure out that the piezo buzzer works by using the piezoelectric effect, where a piezoelectric material, like a small ceramic disc (refer to Figure 2C), deforms when a voltage is applied to it. This deformation causes a vibration in the material, and these small vibrations create sound waves. 
+![image](https://github.com/user-attachments/assets/c32c6df0-d5db-43b7-91d0-ca813f9093fc)
+Figure 2C: How a Piezoelectric Buzzer Functions
 
 With the accelerometer working, I turned my attention to the flex sensor. I needed to detach it from the breadboard while maintaining a stable electrical connection. To achieve this, I soldered wires directly to the sensor and then reconnected it to the breadboard. I tested the setup to ensure the sensor could accurately retrieve and display data on the serial monitor, which it initially did.
 
@@ -113,7 +124,7 @@ For my BlueStamp starter project, I chose to build RGB sliders. RGB sliders allo
 
 ## Challenges
 I encountered several challenges while building the RGB sliders, even though the project was relatively simple compared to other starter options. One issue I faced was ensuring the correct polarity of the LED lights. Typically, the longer leg of an LED indicates the positive side, but in this case, it corresponded to the negative. I had to be very careful not to get it wrong, since a mistake would require me to de-solder and reattach the LED entirely. Another obstacle was accidentally melting the plastic while soldering. Since it was my first time using a soldering iron, I had trouble applying it efficiently, which led to the plastic being exposed to high temperatures for too long. This weakened the structure of the project slightly, but thankfully it didn’t cause any major functional problems.
-
+😩👌👈🍆👨🏻
 ## Next Steps 
 After finishing my starter project, I intend on refining my Arduino skills to ensure that building my intensive project will be easier. I also hope to finish my first milestone by the next few days. 
 
