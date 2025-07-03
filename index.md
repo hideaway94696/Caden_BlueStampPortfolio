@@ -38,6 +38,11 @@ Another important aspect of my project was understanding how pitch, roll, and ya
 
 Figure 3D: Pitch, Roll, and Yaw on an airplane. 
 
+I also needed to export data from the Arduino serial monitor into a Google Sheet for proper analysis. However, the Arduino serial monitor doesn’t format the values correctly, so I had to find an alternative solution. To address this, I downloaded CoolTerm, an application that facilitates communication with devices connected via serial ports. In order for CoolTerm to export the data into a Google Sheet, I had to format it as CSV (Comma Separated Values). Once formatted, I was able to import the data into the Google Sheet and analyze it effectively (refer to Figure 3E for image of organized data).
+
+![image](https://github.com/user-attachments/assets/2736e4d1-b35c-4eaa-a15b-371582ebcbbc)
+Figure 3E: Properly Organized Data in a Google Sheet
+
 <!-- **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F7M7imOVGug" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
