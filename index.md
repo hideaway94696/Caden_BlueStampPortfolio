@@ -154,7 +154,7 @@ Accelerometer Schematic: https://www.mdpi.com/applsci/applsci-12-03994/article_d
 
 
 # Appendix
-##Milestone 1 Code
+## Milestone 1 Code
 ```cpp
 #include <Adafruit_LSM6DS33.h>
 #include <BleSerial.h>
@@ -353,7 +353,7 @@ void loop() {
 }
 ```
 
-##Milestone 2 Code
+## Milestone 2 Code
 ```cpp
 // Include required libraries for IMU, BLE, and I2C communication
 #include <Adafruit_LSM6DS33.h>        // Library for LSM6DS33 accelerometer + gyroscope
