@@ -33,7 +33,9 @@ Figure 3B: Graph displaying data values for 6 'proper' squats
 Figure 3C: Graph displaying data values for an 'improper' squats
 
 Another important aspect of my project was understanding how pitch, roll, and yaw work. Pitch, yaw, and roll are terms describing rotations of an object around three perpendicular axes: the longitudinal (roll), lateral (pitch), and vertical (yaw) axes. To visualize pitch, think of an airplane tilting its nose up and down. To visualize roll, think of an airplane banking/tilting sideways. To visualize yaw, think of an airplane turning left/right (refer to Figure 3D to see pitch, roll, and yaw).
+
 ![image](https://github.com/user-attachments/assets/ae34449f-cf00-406b-aedd-4c9e05483e71)
+
 Figure 3D: Pitch, Roll, and Yaw on an airplane. 
 
 <!-- **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
