@@ -163,7 +163,6 @@ Accelerometer Schematic: https://www.mdpi.com/applsci/applsci-12-03994/article_d
 ```cpp
 #include <Adafruit_LSM6DS33.h>
 #include <BleSerial.h>
-// For SPI mode, we need a CS pin
 #include <Wire.h>
 
 Adafruit_LSM6DS33 lsm6ds33 {};
@@ -173,13 +172,11 @@ void setup(void) {
   Serial.begin(115200);
   ble.begin("Values");
   while (!Serial)
-    delay(10); // will pause Zero, Leonardo, etc until serial console opens
+    delay(10); 
 
   Serial.println("Adafruit LSM6DS33 test!");
 
   if (lsm6ds33.begin_I2C()) {
-    // if (!lsm6ds33.begin_SPI(LSM_CS)) {
-    // if (!lsm6ds33.begin_SPI(LSM_CS, LSM_SCK, LSM_MISO, LSM_MOSI)) {
     Serial.println("Failed to find LSM6DS33 chip");
     while (1) {
       delay(10);
