@@ -29,8 +29,9 @@ Figure 3A: Possible placements of accelerometers on a knee rehab device (thigh a
 Figure 3B: Graph displaying data values for 6 'proper' squats
 
 ![image](https://github.com/user-attachments/assets/4de42f7b-8676-4f2c-b836-cd6f68030c06)
+![image](https://github.com/user-attachments/assets/6384d6d9-df66-4cdc-a8e5-61ad91387d07)
 
-Figure 3C: Graph displaying data values for an 'improper' squats
+Figure 3C: Graph displaying data values for an 'improper' vs 'proper' squat. Note that the green value experiences greatest change, and therefore it would be the best to add thresholds to the green value. 
 
 Another important aspect of my project was understanding how pitch, roll, and yaw work. Pitch, yaw, and roll are terms describing rotations of an object around three perpendicular axes: the longitudinal (roll), lateral (pitch), and vertical (yaw) axes. To visualize pitch, think of an airplane tilting its nose up and down. To visualize roll, think of an airplane banking/tilting sideways. To visualize yaw, think of an airplane turning left/right (refer to Figure 3D to see pitch, roll, and yaw).
 
