@@ -26,7 +26,7 @@ Figure 3A: Possible placements of accelerometers on a knee rehab device (thigh a
 
 ![image](https://github.com/user-attachments/assets/fbe8d34a-06c9-424f-a469-a362e45388d8)
 
-Figure 3B: Graph displaying data values for 6 'proper' squats
+Figure 3B: Graph displaying data values for 6 'proper' squats. 'PRY' represents 'Pitch, Roll, and Yaw', and is the Y-axis. Time represents the x-axis, and is measured in tenths of a second.
 
 ![image](https://github.com/user-attachments/assets/d4c6071c-d202-43de-8f02-92ae1495725d)
 
@@ -154,7 +154,7 @@ Accelerometer Schematic: https://www.mdpi.com/applsci/applsci-12-03994/article_d
 
 
 # Appendix
-Milestone 1 Code
+##Milestone 1 Code
 ```cpp
 #include <Adafruit_LSM6DS33.h>
 #include <BleSerial.h>
@@ -353,7 +353,7 @@ void loop() {
 }
 ```
 
-Milestone 2 Code
+##Milestone 2 Code
 ```cpp
 // Include required libraries for IMU, BLE, and I2C communication
 #include <Adafruit_LSM6DS33.h>        // Library for LSM6DS33 accelerometer + gyroscope
