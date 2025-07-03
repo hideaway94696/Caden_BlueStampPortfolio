@@ -25,16 +25,16 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 <iframe width="743" height="418" src="https://www.youtube.com/embed/2_FaPk_xcjo" title="Caden Y. Milestone 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-# Schematics
+## Schematics
 ![image](https://github.com/user-attachments/assets/e0ed54cf-292d-4fa4-9275-32e36ba7ce25)
 
 Figure 2: Flex Sensor detached from breadboard but still connected. Accelerometer attached and wired to breadboard.
 
 
-# Description
-The goal of my second milestone was to attach all the major components onto the knee brace and add a buzzer that beeps when certain values are detected (refer to Figure 2 for a schematic of all the components). As of now, when flex sensor values reach over 3200, the buzzer will release short beeps that indicate the desired squat angle has been reached. Additionally, when the acceleration (in the x-axis) is under zero, the buzzer will release a long beep until acceleration is nonnegative. None of these values are properly tuned, though, so I'll need to spend some time enhancing the accuracy of the device. Throughout the process of finishing my second milestone, I encountered a number of technical challenges that required troubleshooting and iterative problem-solving.
+## Description
+The goal of my second milestone was to attach all the major components onto the knee brace and add a buzzer that beeps when certain values are detected (refer to Figure 2 for a schematic of all the components). As of now, when flex sensor values reach over 3200, the buzzer will release short beeps that indicate the desired squat angle has been reached. Additionally, when the acceleration (in the x-axis) is under zero, the buzzer will release a long beep until acceleration is nonnegative. None of these values are properly tuned, though, so I'll need to spend some time enhancing the accuracy of the device. I also worked on connecting the Arduino ESP32 to Bluetooth. The Arduino ESP32 supports the use of BLE (otherwise known as Bluetooth Low Energy). BLE enables short-range communication using low power consumption. It works by using the 2.4 GHz ISM band, which is a globally allocated radio frequency band used for various applications like Bluetooth, Wi-Fi, and microwave ovens. The Arduino ESP32 acts as a peripheral, which broadcasts data and can be connected to by a central, and in this scenario, is my phone. In general, the BLE Communication Flow can be described in 4 steps: 1) Advertising (peripheral makes its presence known), 2) Scanning (the central scans for nearby peripherals), 3) Connection (central connects to peripheral), and 4) Data Exchange. Throughout the process of finishing my second milestone, I encountered a number of technical challenges that required troubleshooting and iterative problem-solving.
 
-# Challenges
+## Challenges
 I began by soldering the headers onto the accelerometer. During this process, I accidentally created several short circuits, which interfered with the functionality of the accelerometer. To fix this, I had to carefully desolder the connections and try again. After some difficulty, I successfully soldered the headers, allowing me to mount the accelerometer onto the breadboard.
 
 I also learned how an accelerometer works. The Adafruit LSM6DS33 Accelerometer contains an extremely small mass and spring in order to determine acceleration in all three axes (refer to Figure 2A). Because F = m * a (Newton's Second Law) and F = k * x (Hooke's Law), we can find out acceleration by substituting F for F, making m * a = k * x. Since m (mass), k (spring constant), and x (displacement of the spring from equilibrium position) are all known, we can find out acceleration by rearranging the equation to become: a = (k * x)/(m). The damper effectively minimizes vibrations to ensure the entire accelerometer doesn't vibrate indefinitely. 
@@ -53,7 +53,7 @@ I reviewed my circuit against the schematics and confirmed all the wiring was co
 
 Another part of my second milestone was to incorporate a buzzer that will beep when a certain value from the accelerometer or flex sensor is detected. Refer to the Appendix (Milestone 2 Code) to see my implementation of an if-else statement that activated the buzzer when necessary.
 
-# Next Steps
+## Next Steps
 For my third milestone, I plan to: 1) Tune the output values of the flex sensor and accelerometer for accuracy, 2) Attach the power bank to make the device portable. At this stage, I can't transfer the circuit on the breadboard to the PCB or sew the device onto the knee brace, as doing so would make the setup permanent. I need to leave room for further modifications before finalizing the build.
 
 
@@ -61,16 +61,16 @@ For my third milestone, I plan to: 1) Tune the output values of the flex sensor 
 
 <iframe width="736" height="414" src="https://www.youtube.com/embed/YUhANFDKLhA" title="Caden Y. Milestone 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-# Schematics 
+## Schematics 
 <img width="508" alt="Screen Shot 2025-06-20 at 3 33 19 PM" src="https://github.com/user-attachments/assets/6695df6b-a969-4e7e-b170-94c6fcf848ff" />
 
 Figure 1: Flex Sensor and Accelerometer wired/connected to breadboard and Arduino ESP32. 
 
 
-# Description
+## Description
 The goal of my first milestone was to get the flex sensor and accelerometer to successfully collect data and display it on the serial monitor. As of now, whenever the flex sensor detects bending/resistance, it will display the corresponding values in the serial monitor under "Flex Sensor Values". Additionally, whenever the accelerometer detects acceleration along the x, y, or z axes, it will display the corresponding values of acceleration in the serial monitor under "Acceleration x: --  y: --  z: --". Throughout the process of finishing my first milestone, I encountered several challenges related to both circuit building and coding.
 
-# Challenges
+## Challenges
 I began by assembling the circuit for the flex sensor using the larger Arduino Elegoo microcontroller. I connected the appropriate wires to power and ground and used a 10K ohm resistor to prevent short circuits. I also implemented a voltage divider, learning along the way that the resistor values could be calculated using the formula:
 Vout = (R2 / (R1 + R2)) * Vin.
 
@@ -84,41 +84,39 @@ After confirming that the code was not the issue, I re-examined the circuit. Tha
 
 Next, I turned to the accelerometer. This time, I decided to connect it directly to the ESP32 instead of prototyping on the Elegoo board first. The hardware setup was easier since no resistors were needed, but I faced a small coding issue. One line of code was incorrectly signaling a data retrieval failure, even though the accelerometer was working. As a result, the program halted before the data could be transmitted to the serial monitor. Refer to the Appendix (Milestone 1 Code) to see how I resolved this issue.
 
-# Next Steps
+## Next Steps
 For my second milestone, I plan to: 1) Integrate Bluetooth functionality so data can be sent to a mobile app, 2) Add a power bank to eliminate the need to keep the device plugged into a computer, 3) Mount the device onto a knee brace to begin collecting accurate movement data in a real-world setup.
 
+
 # Bill of Materials
-
-<!-- Here's where you'll list the parts in your project. To add more rows, just copy and paste the example rows below.
-Don't forget to place the link of where to buy each component inside the quotation marks in the corresponding row after href =. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize this to your project needs. 
-
-| **Part** | **Note** | **Price** | **Link** |
-|:--:|:--:|:--:|:--:|
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-| Item Name | What the item is used for | $Price | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-
-# Other Resources/Examples
-One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
-- [Example 1](https://trashytuber.github.io/YimingJiaBlueStamp/)
-- [Example 2](https://sviatil0.github.io/Sviatoslav_BSE/)
-- [Example 3](https://arneshkumar.github.io/arneshbluestamp/)
-
-To watch the BSE tutorial on how to create a portfolio, click here. -->
+| **Arduino ESP32S** | **Microcontroller** | **$13** | <a href ="https://www.amazon.com/Teyleten-Robot-ESP-WROOM-32-Development-Microcontroller/dp/B08246MCL5/ref=sr_1_10?crid=2D7JWTV607DLJ&dib=eyJ2IjoiMSJ9.muXyANMuy8-oE8Y74H25ZmbeUH4QVoqL4p3vOP7PNHiBTcD3JF0f6YN8ckv2KkCEOtjdM6pcU0Zd_eBIr7_sHSmSaozJEn_rDNaMAMh2QyJKdVaUYd-7KufZomvs7MwoBqc18GN4M95rCLYntJ485_MPH3aN3ksSaCAkH1stHUrgqq8ASKqi2s5Xjg1l75sKwzfVeLzZnyxOK1JrIkbL8Npos_fdM1NpA__gRTq6kdXxYmj0mxAwh5BRkrR_VIFc_-eJR1XljSUyVyT_LzFsC_ZAboFgOV0wgP2vWe0FNQI.qmVWK2VUk1ZviU20HVRBNOdTnmbUm3B8zNGwGf7xcwc&dib_tag=se&keywords=arduino%2Besp32&qid=1751557896&s=electronics&sprefix=arduino%2Besp32%2Celectronics%2C228&sr=1-10&th=1"> Link </a> |
+| **BodyProx Knee Sleeve** | **Keeps Components on Knee** | **$15** | <a href ="https://www.amazon.com/gp/aw/d/B0987XN6QH/?_encoding=UTF8&pd_rd_plhdr=t&aaxitk=5aed513eac49a60526c6d9777d9d93db&hsa_cr_id=7875900910501&qid=1719864251&sr=1-1-9e67e56a-6f64-441f-a281+df67fc737124&ref_=sbx_be_s_sparkle_mcd_asin_0_mariomsg&pd_rd_w=qsSVr&content-id=amzn1.sym.8591358d-1345-4efd-9d50-5bd4e69cd942%3Aamzn1.sym.8591358d-1345-4efd-9d50-5bd4e69cd942&pf_rd_p=8591358d-1345-4efd-9d50-5bd4e69cd942&pf_rd_r=PA56EJATP874WHNCNE6H&pd_rd_wg=ihoKq&pd_rd_r=388c0a8d-3fca-4ec1-a970-cdcf8c7489c9&th=1"> Link </a> |
+| **Adafruit Flex Sensor** | **Measures Bend of Knee** | **$18** | <a href ="https://www.amazon.com/Adafruit-Long-Flex-sensor-ADA182/dp/B01BNNNS5Q/ref=sr_1_3?crid=1GEOF65S7SCLW&dib=eyJ2IjoiMSJ9.lhZF8xWpz39rDzMy73v%20TT23Ss_RjBfj1RB7kEAbJ9D0yBHgcKw1YMgsMIaCD6oj4egLyFTXzJPJROjBXBNuLyvP3hfVG8V9B_gtFq3L7mxpoS6d2cm8cA453b16MvFuDDX9kD9oJbk3173icFBHyeg2y1Vvlqp7qWjWgna1VVPTA_OUwnV1JetfY2OnlDWNX90LumgmwPODB1DZMXj6Kx2Tzoz5_4Zp1N0XQmSndWHGVCr9QXxmgB0P2268U5jbYeGzZgUcZSGgiQ8JObtVoiz5yTr6MRas9v0iQbuOp6U.q-rFWTMu_qQemed_1UjkLOc3NMOPC5JBJq03fSe7z5M&dib_tag=se&keywords=flex+sensor&qid=1719864423&s=industrial&sprefix=flex+sensor%2Cindustrial%2C138&sr=1-3"> Link </a> |
+| **Adafruit LSM6DS3TR Accelerometer** | **$20** | <a href = "https://www.adafruit.com/product/5543"> Link </a> |
+| **Piezo Buzzer** | **Beeps when Incorrect Form Detected** | **$6** | <a href = "https://www.amazon.com/Cylewet-Terminals-Electronic-Electromagnetic-Impedance/dp/B01NCOXB2Q/ref=sr_1_6?crid=2LHY512NYTX03&dib=eyJ2IjoiMSJ9.v9xp9jV7C-sQT7j4p0UIV_xVKzU8DDa55Zy7nzfVmYaimJdByrZMfNvEm2fHDR0za4DaPd8brwiVZEi-IHCgo2sBg8k3EJMcmg-sVR90kJcP9oOf8zSFh1iWZlw1PJrUObynF7hsFTlUl4Mjw1yLhEb5aveIgXUMHiN2P2TdYaKK_yFtrf95J7L5mXjX1oEvZH1Cnvc-xk1Nel5twsTKJkHHc66-oivwv6bs2SLxMd-EUIVOKxL7DltKGCHB1GZoH1BXVwGU2Y8otebOLO8e3y7KD-K5CpOcO4zjO47owcg.r5O90tcYn3TNrCpGtKRJVSosnV60zYqj_ue96Klj1DU&dib_tag=se&keywords=piezo+buzzer&qid=1719864686&s=industrial&sprefix=piezo+buzzer%2Cindustrial%2C134&sr=1-6"> Link </a>|
+| **220 Ohm Resistor** | **Provides Resistance for Flex Sensor** | **$4** | <a href = "https://www.amazon.com/California-JOS-Resistance-CJ50-004-220/dp/B0BDKQSZHM/ref=sr_1_3?crid=3SFKVJ53VBE4D&dib=eyJ2IjoiMSJ9.pq8IXZtwkjU13efAoUQ01zBUlR2f2Y7f-E16x07ioTKL_3aH4OzxTsM5DaSXBRXLlhDD4Gfyi6ew3fKoaYqDPwQ4kz8UMw4sIKhxX-mOOGXbZIFugasSgq4TqktqYo7m41HoP4MVxl_vrYBUGouW0ZyPQiwjtRqm_j2j1oW8gVs3M8LZa4qfKynQtLAt3V-H_CPBIVkZFBnXwfPXZ-BMyF7bm3BwZMNd3BbPyqMudHuDm3yiBdBZN6r88lAHwf28Ma-If8go4xBKPFicl4GUYWOkP1WMeg0FNymbBulr6Nw.lBNwSGJBYkbV8P0Gi4agY0AZL4zps2b2C3jlE63S4yU&dib_tag=se&keywords=220%2Bohm%2Bresistor&qid=1751558407&s=industrial&sprefix=220%2Bohm%2Bresisto%2Cindustrial%2C128&sr=1-3&th=1"> Link </a> |
+| **Assorted Single-Core Wires** | **Connections for Components** | **$15** | <a href = "https://www.amazon.com/Electrical-7colors-spools-UL1007-breadboard/dp/B083DN5R61/ref=asc_df_B083DN5R61/?tag=hyprod-20&linkCode=df0&hvadid=692875362841&hvpos=&hvnetw=g&hvrand=8530834579962313816&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9032183&hvtargid=pla-2281435179978&psc=1&mcid=8b897963727d312e9a95e09793193a56&hvocijid=8530834579962313816-B083DN5R61-&hvexpln=73&gad_source=1"> Link </a> | 
+| **PCB Board** | **Holds all Parts** | **$10** | <a href = "https://www.amazon.com/ELEGOO-Prototype-Soldering-Compatible-Arduino/dp/B072Z7Y19F/ref=sr_1_fkmr0_1?crid=18FRQ5Z77CLN3&dib=eyJ2IjoiMSJ9.cFO3IbuqDHBg13mO-bkEuDZt4D5ArS6wMFfqDWRiL40.8EixwzeL0N95GaD5v3ouxOydzFTpfyCVcRnI53u4MqE&dib_tag=se&keywords=proto+board+10xX&qid=1720637134&sprefix=proto+board+10xx%2Caps%2C126&sr=8-1-fkmr0"> Link </a> |
 
 
 # Starter Project
 
 <iframe width="743" height="418" src="https://www.youtube.com/embed/LLyRvk59FLk" title="Caden Y. Starter Project" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-# Description
+## Description
 For my BlueStamp starter project, I chose to build RGB sliders. RGB sliders allow you to mix the colors red, green, and blue to create virtually any color within the RGB spectrum. For example, if I want to create a shade of purple, I can increase the saturation levels of red and blue while lowering the green. I chose this project because I thought it would be really interesting to create a device that visually demonstrates how different colors are formed from just three primary components. Additionally, I saw this as a great opportunity to improve my soldering skills and get comfortable with assembling circuits. Practicing on this project will help me avoid making major mistakes when I move on to my more intensive main project. 
 
-# Challenges
+## Challenges
 I encountered several challenges while building the RGB sliders, even though the project was relatively simple compared to other starter options. One issue I faced was ensuring the correct polarity of the LED lights. Typically, the longer leg of an LED indicates the positive side, but in this case, it corresponded to the negative. I had to be very careful not to get it wrong, since a mistake would require me to de-solder and reattach the LED entirely. Another obstacle was accidentally melting the plastic while soldering. Since it was my first time using a soldering iron, I had trouble applying it efficiently, which led to the plastic being exposed to high temperatures for too long. This weakened the structure of the project slightly, but thankfully it didn’t cause any major functional problems.
 
-# Next Steps 
+## Next Steps 
 After finishing my starter project, I intend on refining my Arduino skills to ensure that building my intensive project will be easier. I also hope to finish my first milestone by the next few days. 
+
+# References
+Flex Sensor: [https://www.instructables.com/How-to-Make-FLEX-Sensor-at-Home-DIY-Flex-Sensor/](https://content.instructables.com/FBK/WEOU/KKQ0ZIXS/FBKWEOUKKQ0ZIXS.png?auto=webp&frame=1&width=1024&fit=bounds&md=MjAyMS0wMi0wNCAwMTozNzo1NS4w&_gl=1*8o72m2*_ga*MjQwNDI0NzY1LjE3NTAxODY2MTA.*_ga_NZSJ72N6RX*czE3NTE1NTczOTUkbzUkZzEkdDE3NTE1NTc0ODkkajYwJGwwJGgw)
+
+Accelerometer Schematic: https://www.mdpi.com/applsci/applsci-12-03994/article_deploy/html/images/applsci-12-03994-g001.png
+
 
 # Appendix
 Milestone 1 Code
@@ -139,17 +137,6 @@ void setup(void) {
 
   Serial.println("Adafruit LSM6DS33 test!");
 
-  //Wire.begin(21, 22);
-  /*for(int i = 0; i <= 127; i ++) {
-    Wire.beginTransmission(i);
-    if(!Wire.endTransmission()){
-      Serial.print("device found");
-      Serial.print(i);
-      Serial.println();
-    }
-  }
-  */
-
   if (lsm6ds33.begin_I2C()) {
     // if (!lsm6ds33.begin_SPI(LSM_CS)) {
     // if (!lsm6ds33.begin_SPI(LSM_CS, LSM_SCK, LSM_MISO, LSM_MOSI)) {
@@ -161,7 +148,6 @@ void setup(void) {
 
   Serial.println("LSM6DS33 Found!");
 
-  // lsm6ds33.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);
   Serial.print("Accelerometer range set to: ");
   lsm6ds33.setAccelRange(LSM6DS_ACCEL_RANGE_16_G);
   switch (lsm6ds33.getAccelRange()) {
@@ -179,7 +165,6 @@ void setup(void) {
     break;
   }
 
-  // lsm6ds33.setGyroRange(LSM6DS_GYRO_RANGE_250_DPS);
   Serial.print("Gyro range set to: ");
   lsm6ds33.setGyroRange(LSM6DS_GYRO_RANGE_2000_DPS);
   switch (lsm6ds33.getGyroRange()) {
@@ -202,7 +187,7 @@ void setup(void) {
     break; // unsupported range for the DS33
   }
 
-  // lsm6ds33.setAccelDataRate(LSM6DS_RATE_12_5_HZ);
+
   Serial.print("Accelerometer data rate set to: ");
   lsm6ds33.setAccelDataRate(LSM6DS_RATE_52_HZ);
   switch (lsm6ds33.getAccelDataRate()) {
@@ -241,7 +226,6 @@ void setup(void) {
     break;
   }
 
-  // lsm6ds33.setGyroDataRate(LSM6DS_RATE_12_5_HZ);
   Serial.print("Gyro data rate set to: ");
   lsm6ds33.setGyroDataRate(LSM6DS_RATE_6_66K_HZ);
   switch (lsm6ds33.getGyroDataRate()) {
@@ -331,22 +315,6 @@ void loop() {
   ble.println(" m/s^2 ");
 
   delay(1000);
-
-  //  // serial plotter friendly format
-
-  //  Serial.print(temp.temperature);
-  //  Serial.print(",");
-
-  //  Serial.print(accel.acceleration.x);
-  //  Serial.print(","); Serial.print(accel.acceleration.y);
-  //  Serial.print(","); Serial.print(accel.acceleration.z);
-  //  Serial.print(",");
-
-  // Serial.print(gyro.gyro.x);
-  // Serial.print(","); Serial.print(gyro.gyro.y);
-  // Serial.print(","); Serial.print(gyro.gyro.z);
-  // Serial.println();
-  //  delayMicroseconds(10000);
 }
 ```
 
@@ -513,21 +481,5 @@ void loop() {
   }
 
   delay(1000);  // Wait 1 second before next reading
-
-  // Optional: Serial Plotter friendly format
-  // (commented out)
-  /*
-  Serial.print(temp.temperature);
-  Serial.print(",");
-
-  Serial.print(accel.acceleration.x);
-  Serial.print(","); Serial.print(accel.acceleration.y);
-  Serial.print(","); Serial.print(accel.acceleration.z);
-  Serial.print(",");
-
-  Serial.print(gyro.gyro.x);
-  Serial.print(","); Serial.print(gyro.gyro.y);
-  Serial
-  */
 }
 ```
