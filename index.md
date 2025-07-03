@@ -28,8 +28,7 @@ Figure 3A: Possible placements of accelerometers on a knee rehab device (thigh a
 
 Figure 3B: Graph displaying data values for 6 'proper' squats
 
-![image](https://github.com/user-attachments/assets/4de42f7b-8676-4f2c-b836-cd6f68030c06)
-![image](https://github.com/user-attachments/assets/6384d6d9-df66-4cdc-a8e5-61ad91387d07)
+![image](https://github.com/user-attachments/assets/4de42f7b-8676-4f2c-b836-cd6f68030c06)![image](https://github.com/user-attachments/assets/6384d6d9-df66-4cdc-a8e5-61ad91387d07)
 
 Figure 3C: Graph displaying data values for an 'improper' vs 'proper' squat. Note that the green value experiences greatest change, and therefore it would be the best to add thresholds to the green value. 
 
