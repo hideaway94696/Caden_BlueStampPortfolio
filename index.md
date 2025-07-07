@@ -52,7 +52,13 @@ For your final milestone, explain the outcome of your project. Key details to in
 - What your biggest challenges and triumphs were at BSE
 - A summary of key topics you learned about
 - What you hope to learn in the future after everything you've learned at BSE -->
+One final major obstacle I encountered involved an issue with the Arduino ESP32. I noticed that whenever I bent my knee slightly, the Serial Monitor displayed a "Hardware NACK" error. At that point, the accelerometer values would freeze, and the system would become unresponsive until I manually reset the ESP32. To troubleshoot, I started by isolating the accelerometer. I wrote a minimal script with the sole purpose of printing out its values, but the same error persisted. I then observed that the error consistently appeared whenever the piezoelectric buzzer was activated. This led me to suspect the buzzer, so I carefully reviewed its connections and confirmed the schematic was correct. With the buzzer and accelerometer ruled out, I had no choice but to investigate the microcontroller itself. After replacing the ESP32 with a new one, the code was able to work. 
 
+Unfortunately, due to the changes I made, the accelerometer data I had previously logged was no longer accurate. I needed to re-analyze the data by repeatedly performing both proper and improper squats while adjusting the update frequency. After making several minor modifications, I was able to generate the following graph:
+![image](https://github.com/user-attachments/assets/e5c96121-69aa-43aa-82fd-ae7619a27cfc)
+Figure 3F: New Graph of Squat Values
+
+Upon examining the graph, I noticed that the difference between proper and improper squats was minimal (see Figure 3F). To improve accuracy, I decided to isolate a single variable—pitch, yaw, or roll—that showed the most variation. In my case, I chose to focus on roll, since bending the knees inward caused the roll value to change significantly. This made it a strong candidate for meaningful analysis. Based on the graph’s minimum values, I set threshold limits, and after implementing those changes, the system began functioning correctly again. 🍆👨🏻😩🍆🍑👌👈
 
 # Second Milestone
 
