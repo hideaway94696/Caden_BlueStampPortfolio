@@ -11,6 +11,7 @@ The Knee Rehabilitation Device is a wearable system designed to assist patients 
 ![Headstone Image](logo.svg) -->
 
 # Final Milestone
+<iframe width="806" height="453" src="https://www.youtube.com/embed/kT8-kyL3Cao" title="Caden Y.  Milestone 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Description
 For my final milestone, the device must function properly, meaning it is able to track incorrect squat form and beep when it is detected. If the user reaches the proper angle of a squat, the buzzer should also be able to beep. Because of these specific conditions, I met numerous challenges while finishing the project.
