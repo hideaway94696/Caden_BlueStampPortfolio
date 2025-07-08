@@ -57,9 +57,9 @@ One final major obstacle I encountered involved an issue with the Arduino ESP32.
 
 Unfortunately, due to the changes I made, the accelerometer data I had previously logged was no longer accurate. I needed to re-analyze the data by repeatedly performing both proper and improper squats while adjusting the update frequency. After making several minor modifications, I was able to generate the following graph:
 ![image](https://github.com/user-attachments/assets/e5c96121-69aa-43aa-82fd-ae7619a27cfc)
-Figure 3F: New Graph of Squat Values
+Figure 3F: New Graph of Squat Values 
 
-Upon examining the graph, I noticed that the difference between proper and improper squats was minimal (see Figure 3F). To improve accuracy, I decided to isolate a single variable—pitch, yaw, or roll—that showed the most variation. In my case, I chose to focus on roll, since bending the knees inward caused the roll value to change significantly. This made it a strong candidate for meaningful analysis. Based on the graph’s minimum values, I set threshold limits, and after implementing those changes, the system began functioning correctly again. 🍆👨🏻😩🍆🍑👌👈
+Upon examining the graph, I noticed that the difference between proper and improper squats was minimal (see Figure 3F). To improve accuracy, I decided to isolate a single variable, pitch, yaw, or roll, that showed the most variation. In my case, I chose to focus on roll, since bending the knees inward caused the roll value to change significantly (every improper squat had a difference of around 15-20 degrees). This made it a strong candidate for meaningful analysis. Based on the graph, I set thresholds at its minimums, and after implementing those changes, the system began functioning correctly again. 
 
 # Second Milestone
 
