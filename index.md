@@ -526,3 +526,190 @@ void loop() {
   delay(1000);  // Wait 1 second before next reading
 } 
 ```
+
+## Milestone 3 Code
+```cpp
+// Include necessary libraries
+#include <Adafruit_LSM6DS33.h>        // For interfacing with LSM6DS33 IMU
+#include <BleSerial.h>                // For Bluetooth serial communication
+#include <Adafruit_Sensor.h>          // Common sensor interface library
+#include <Wire.h>                     // I2C communication
+#include <MadgwickAHRS.h>             // Sensor fusion algorithm
+#include <math.h>                     // Math operations like fabs
+
+// Utility function to compare floats within a tolerance
+bool approxEqual(float a, float b, float tol = 0.5) {
+  return fabs(a - b) < tol;
+}
+
+// Create instances for IMU, Bluetooth, and Madgwick filter
+Adafruit_LSM6DS33 lsm6ds33 {};     // LSM6DS33 sensor object
+BleSerial ble;                     // BLE Serial communication object
+Madgwick filter;                   // Sensor fusion filter
+
+// Define hardware pin connections
+const int FlexPin = 35;            // Analog pin for flex sensor
+const int Buzzer = 23;             // Digital pin for buzzer output
+
+// Variables for sensor readings and timing
+int FlexValue = 0;
+unsigned long lastUpdate = 0;      // Stores last update timestamp
+unsigned long timeStep = 0;        // Incremental step counter for output
+
+void setup(void) {
+  // Start serial communication
+  Serial.begin(115200);
+
+  // Initialize BLE serial with device name
+  ble.begin("Values");
+
+  // Set pin modes
+  pinMode(FlexPin, INPUT);
+  pinMode(Buzzer, OUTPUT);
+
+  // Wait for Serial monitor to be available
+  while (!Serial)
+    delay(10);
+
+  Serial.println("Adafruit LSM6DS33 test!");
+
+  // Begin I2C communication with custom SDA/SCL pins
+  Wire.begin(21, 22);
+
+  // Scan for I2C devices on the bus
+  for (int i = 0; i <= 127; i++) {
+    Wire.beginTransmission(i);
+    if (!Wire.endTransmission()) {
+      Serial.print("device found: ");
+      Serial.println(i);
+    }
+  }
+
+  // Initialize the LSM6DS33 sensor
+  if (!lsm6ds33.begin_I2C()) {
+    Serial.println("Failed to find LSM6DS33 chip");
+    while (1) delay(10);  // Halt program if initialization fails
+  }
+
+  Serial.println("LSM6DS33 Found!");
+
+  // Set accelerometer range to ±16G
+  Serial.print("Accelerometer range set to: ");
+  lsm6ds33.setAccelRange(LSM6DS_ACCEL_RANGE_16_G);
+  switch (lsm6ds33.getAccelRange()) {
+    case LSM6DS_ACCEL_RANGE_2_G: Serial.println("+-2G"); break;
+    case LSM6DS_ACCEL_RANGE_4_G: Serial.println("+-4G"); break;
+    case LSM6DS_ACCEL_RANGE_8_G: Serial.println("+-8G"); break;
+    case LSM6DS_ACCEL_RANGE_16_G: Serial.println("+-16G"); break;
+  }
+
+  // Set gyroscope range to ±2000 degrees/s
+  Serial.print("Gyro range set to: ");
+  lsm6ds33.setGyroRange(LSM6DS_GYRO_RANGE_2000_DPS);
+  switch (lsm6ds33.getGyroRange()) {
+    case LSM6DS_GYRO_RANGE_125_DPS: Serial.println("125 degrees/s"); break;
+    case LSM6DS_GYRO_RANGE_250_DPS: Serial.println("250 degrees/s"); break;
+    case LSM6DS_GYRO_RANGE_500_DPS: Serial.println("500 degrees/s"); break;
+    case LSM6DS_GYRO_RANGE_1000_DPS: Serial.println("1000 degrees/s"); break;
+    case LSM6DS_GYRO_RANGE_2000_DPS: Serial.println("2000 degrees/s"); break;
+    case ISM330DHCX_GYRO_RANGE_4000_DPS: break; // Not supported on DS33
+  }
+
+  // Set accelerometer data rate to 52 Hz
+  Serial.print("Accelerometer data rate set to: ");
+  lsm6ds33.setAccelDataRate(LSM6DS_RATE_52_HZ);
+  switch (lsm6ds33.getAccelDataRate()) {
+    case LSM6DS_RATE_SHUTDOWN: Serial.println("0 Hz"); break;
+    case LSM6DS_RATE_12_5_HZ: Serial.println("12.5 Hz"); break;
+    case LSM6DS_RATE_26_HZ: Serial.println("26 Hz"); break;
+    case LSM6DS_RATE_52_HZ: Serial.println("52 Hz"); break;
+    case LSM6DS_RATE_104_HZ: Serial.println("104 Hz"); break;
+    case LSM6DS_RATE_208_HZ: Serial.println("208 Hz"); break;
+    case LSM6DS_RATE_416_HZ: Serial.println("416 Hz"); break;
+    case LSM6DS_RATE_833_HZ: Serial.println("833 Hz"); break;
+    case LSM6DS_RATE_1_66K_HZ: Serial.println("1.66 KHz"); break;
+    case LSM6DS_RATE_3_33K_HZ: Serial.println("3.33 KHz"); break;
+    case LSM6DS_RATE_6_66K_HZ: Serial.println("6.66 KHz"); break;
+  }
+
+  // Set gyroscope data rate to 6.66 KHz
+  Serial.print("Gyro data rate set to: ");
+  lsm6ds33.setGyroDataRate(LSM6DS_RATE_6_66K_HZ);
+  switch (lsm6ds33.getGyroDataRate()) {
+    case LSM6DS_RATE_SHUTDOWN: Serial.println("0 Hz"); break;
+    case LSM6DS_RATE_12_5_HZ: Serial.println("12.5 Hz"); break;
+    case LSM6DS_RATE_26_HZ: Serial.println("26 Hz"); break;
+    case LSM6DS_RATE_52_HZ: Serial.println("52 Hz"); break;
+    case LSM6DS_RATE_104_HZ: Serial.println("104 Hz"); break;
+    case LSM6DS_RATE_208_HZ: Serial.println("208 Hz"); break;
+    case LSM6DS_RATE_416_HZ: Serial.println("416 Hz"); break;
+    case LSM6DS_RATE_833_HZ: Serial.println("833 Hz"); break;
+    case LSM6DS_RATE_1_66K_HZ: Serial.println("1.66 KHz"); break;
+    case LSM6DS_RATE_3_33K_HZ: Serial.println("3.33 KHz"); break;
+    case LSM6DS_RATE_6_66K_HZ: Serial.println("6.66 KHz"); break;
+  }
+
+  // Enable data-ready interrupts
+  lsm6ds33.configInt1(false, false, true); // Accelerometer DRDY on INT1
+  lsm6ds33.configInt2(false, true, false); // Gyroscope DRDY on INT2
+
+  // Initialize Madgwick filter (sensor fusion) at 10 Hz
+  filter.begin(10);
+}
+
+void loop() {
+  // Time delta in seconds for sensor fusion
+  unsigned long currentMicros = micros();
+  float deltaTime = (currentMicros - lastUpdate) / 1000000.0f;
+  lastUpdate = currentMicros;
+
+  // Read flex sensor value
+  FlexValue = analogRead(FlexPin);
+
+  // Variables for storing sensor events
+  sensors_event_t accel;
+  sensors_event_t gyro;
+  sensors_event_t temp;
+
+  // Get the latest sensor readings
+  lsm6ds33.getEvent(&accel, &gyro, &temp);
+
+  // Extract raw gyro values
+  float gx = gyro.gyro.x;
+  float gy = gyro.gyro.y;
+  float gz = gyro.gyro.z;
+
+  // Update the Madgwick filter with gyro and accel values
+  filter.updateIMU(gx, gy, gz,
+                   accel.acceleration.x,
+                   accel.acceleration.y,
+                   accel.acceleration.z);
+
+  // Retrieve orientation values
+  float roll = filter.getRoll();     // In degrees
+  float pitch = filter.getPitch();   // In degrees
+  float yaw = filter.getYaw();       // In degrees
+
+  // Send orientation over Bluetooth
+  ble.print(roll); ble.print(", ");
+  ble.print(pitch); ble.print(", ");
+  ble.print(yaw); ble.println();
+
+  // Print values to Serial Monitor
+  Serial.print(roll); Serial.print(", ");
+  Serial.print(pitch); Serial.print(", ");
+  Serial.print(yaw); Serial.print(", ");
+  Serial.println(timeStep);
+  Serial.println();
+
+  // Step counter
+  timeStep++;
+
+  // -------- Buzzer Alert Logic --------
+  // Sound the buzzer if:
+  // - Roll is NOT between -75 and -60 degrees, OR
+  // - Yaw is within forward-facing warning range (0–30 OR 330–360)
+  bool rollInRange = (roll >= -75 && roll <= -60);
+  bool yawInBeepRange = (yaw >= 0 && yaw <= 30) || (
+```
+
