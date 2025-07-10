@@ -714,3 +714,316 @@ void loop() {
   bool yawInBeepRange = (yaw >= 0 && yaw <= 30) || (
 ```
 
+## Modifications Code
+```cpp
+#include <Adafruit_LSM6DS33.h>        //
+#include <BleSerial.h>                //
+#include <Adafruit_Sensor.h>          //
+#include <Wire.h>                     //
+#include <MadgwickAHRS.h>             //
+#include <math.h>                     //
+#include <Adafruit_NeoPixel.h>
+
+#define LED_PIN        12
+#define NUM_PIXELS     18
+Adafruit_NeoPixel strip(NUM_PIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
+
+bool approxEqual(float a, float b, float tol=0.5) {
+  return fabs(a - b) < tol;
+}
+
+Adafruit_LSM6DS33 lsm6ds33 {};
+BleSerial ble;
+Madgwick filter;
+//Adafruit_NeoPixel strip(NUM_PIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+const int FlexPin = 35;
+const int Buzzer = 23;
+int FlexValue = 0;
+unsigned long lastUpdate = 0;
+unsigned long timeStep = 0; 
+unsigned long lastGreenUpdate = 0;
+int greenPixelCount = NUM_PIXELS;
+
+void setLEDColor(uint8_t r, uint8_t g, uint8_t b) {
+  strip.setPixelColor(0, strip.Color(r, g, b));
+  strip.setPixelColor(1, strip.Color(r, g, b));
+  strip.setPixelColor(2, strip.Color(r, g, b));
+  strip.setPixelColor(3, strip.Color(r, g, b));
+  strip.setPixelColor(4, strip.Color(r, g, b));
+  strip.setPixelColor(5, strip.Color(r, g, b));
+  strip.setPixelColor(6, strip.Color(r, g, b));
+  strip.setPixelColor(7, strip.Color(r, g, b));
+  strip.setPixelColor(8, strip.Color(r, g, b));
+  strip.setPixelColor(9, strip.Color(r, g, b));
+  strip.setPixelColor(10, strip.Color(r, g, b));
+  strip.setPixelColor(11, strip.Color(r, g, b));
+  strip.setPixelColor(12, strip.Color(r, g, b));
+  strip.setPixelColor(13, strip.Color(r, g, b));
+  strip.setPixelColor(14, strip.Color(r, g, b));
+  strip.setPixelColor(15, strip.Color(r, g, b));
+  strip.setPixelColor(16, strip.Color(r, g, b));
+  strip.setPixelColor(17, strip.Color(r, g, b));
+  strip.setPixelColor(18, strip.Color(r, g, b));
+  strip.show();
+}
+
+
+void setAllPixelsColor(uint8_t r, uint8_t g, uint8_t b) {
+  for (int i = 0; i < NUM_PIXELS; i++) {
+    strip.setPixelColor(i, strip.Color(r, g, b));
+  }
+  strip.show();
+}
+
+void setGreenProgressively() {
+  unsigned long now = millis();
+  if (now - lastGreenUpdate >= 50 && greenPixelCount < NUM_PIXELS) {
+    strip.setPixelColor(greenPixelCount, strip.Color(0, 255, 0));
+    strip.show();
+    greenPixelCount++;
+    lastGreenUpdate = now;
+  }
+}
+
+void resetGreenPixels() {
+  greenPixelCount = 0;
+  for (int i = 0; i < NUM_PIXELS; i++) {
+    strip.setPixelColor(i, 0); // clear
+  }
+  strip.show();
+}
+
+
+void setup(void) {
+  Serial.begin(115200);
+  ble.begin("Values");
+  pinMode(FlexPin, INPUT);
+  pinMode(Buzzer, OUTPUT);
+
+  strip.begin();
+  strip.setBrightness(50); // Adjust if needed
+  setLEDColor(0, 255, 0);  // Start with green (no buzz)
+
+  while (!Serial)
+    delay(10); // will pause Zero, Leonardo, etc until serial console opens
+
+  Serial.println("Adafruit LSM6DS33 test!");
+
+  Wire.begin(21, 22);
+  for(int i = 0; i <= 127; i ++) {
+    Wire.beginTransmission(i);
+    if(!Wire.endTransmission()){
+      Serial.print("device found");
+      Serial.print(i);
+      Serial.println();
+    }
+  }
+  
+
+  if (lsm6ds33.begin_I2C()) {
+    // if (!lsm6ds33.begin_SPI(LSM_CS)) {
+    // if (!lsm6ds33.begin_SPI(LSM_CS, LSM_SCK, LSM_MISO, LSM_MOSI)) {
+    Serial.println("Failed to find LSM6DS33 chip");
+    while (1) {
+      delay(10);
+    }
+  }
+
+  Serial.println("LSM6DS33 Found!");
+
+  // lsm6ds33.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);
+  Serial.print("Accelerometer range set to: ");
+  lsm6ds33.setAccelRange(LSM6DS_ACCEL_RANGE_16_G);
+  switch (lsm6ds33.getAccelRange()) {
+  case LSM6DS_ACCEL_RANGE_2_G:
+    Serial.println("+-2G");
+    break;
+  case LSM6DS_ACCEL_RANGE_4_G:
+    Serial.println("+-4G");
+    break;
+  case LSM6DS_ACCEL_RANGE_8_G:
+    Serial.println("+-8G");
+    break;
+  case LSM6DS_ACCEL_RANGE_16_G:
+    Serial.println("+-16G");
+    break;
+  }
+
+  // lsm6ds33.setGyroRange(LSM6DS_GYRO_RANGE_250_DPS);
+  Serial.print("Gyro range set to: ");
+  lsm6ds33.setGyroRange(LSM6DS_GYRO_RANGE_2000_DPS);
+  switch (lsm6ds33.getGyroRange()) {
+  case LSM6DS_GYRO_RANGE_125_DPS:
+    Serial.println("125 degrees/s");
+    break;
+  case LSM6DS_GYRO_RANGE_250_DPS:
+    Serial.println("250 degrees/s");
+    break;
+  case LSM6DS_GYRO_RANGE_500_DPS:
+    Serial.println("500 degrees/s");
+    break;
+  case LSM6DS_GYRO_RANGE_1000_DPS:
+    Serial.println("1000 degrees/s");
+    break;
+  case LSM6DS_GYRO_RANGE_2000_DPS:
+    Serial.println("2000 degrees/s");
+    break;
+  case ISM330DHCX_GYRO_RANGE_4000_DPS:
+    break; // unsupported range for the DS33
+  }
+
+  // lsm6ds33.setAccelDataRate(LSM6DS_RATE_12_5_HZ);
+  Serial.print("Accelerometer data rate set to: ");
+  lsm6ds33.setAccelDataRate(LSM6DS_RATE_52_HZ);
+  switch (lsm6ds33.getAccelDataRate()) {
+  case LSM6DS_RATE_SHUTDOWN:
+    Serial.println("0 Hz");
+    break;
+  case LSM6DS_RATE_12_5_HZ:
+    Serial.println("12.5 Hz");
+    break;
+  case LSM6DS_RATE_26_HZ:
+    Serial.println("26 Hz");
+    break;
+  case LSM6DS_RATE_52_HZ:
+    Serial.println("52 Hz");
+    break;
+  case LSM6DS_RATE_104_HZ:
+    Serial.println("104 Hz");
+    break;
+  case LSM6DS_RATE_208_HZ:
+    Serial.println("208 Hz");
+    break;
+  case LSM6DS_RATE_416_HZ:
+    Serial.println("416 Hz");
+    break;
+  case LSM6DS_RATE_833_HZ:
+    Serial.println("833 Hz");
+    break;
+  case LSM6DS_RATE_1_66K_HZ:
+    Serial.println("1.66 KHz");
+    break;
+  case LSM6DS_RATE_3_33K_HZ:
+    Serial.println("3.33 KHz");
+    break;
+  case LSM6DS_RATE_6_66K_HZ:
+    Serial.println("6.66 KHz");
+    break;
+  }
+
+  // lsm6ds33.setGyroDataRate(LSM6DS_RATE_12_5_HZ);
+  Serial.print("Gyro data rate set to: ");
+  lsm6ds33.setGyroDataRate(LSM6DS_RATE_6_66K_HZ);
+  switch (lsm6ds33.getGyroDataRate()) {
+  case LSM6DS_RATE_SHUTDOWN:
+    Serial.println("0 Hz");
+    break;
+  case LSM6DS_RATE_12_5_HZ:
+    Serial.println("12.5 Hz");
+    break;
+  case LSM6DS_RATE_26_HZ:
+    Serial.println("26 Hz");
+    break;
+  case LSM6DS_RATE_52_HZ:
+    Serial.println("52 Hz");
+    break;
+  case LSM6DS_RATE_104_HZ:
+    Serial.println("104 Hz");
+    break;
+  case LSM6DS_RATE_208_HZ:
+    Serial.println("208 Hz");
+    break;
+  case LSM6DS_RATE_416_HZ:
+    Serial.println("416 Hz");
+    break;
+  case LSM6DS_RATE_833_HZ:
+    Serial.println("833 Hz");
+    break;
+  case LSM6DS_RATE_1_66K_HZ:
+    Serial.println("1.66 KHz");
+    break;
+  case LSM6DS_RATE_3_33K_HZ:
+    Serial.println("3.33 KHz");
+    break;
+  case LSM6DS_RATE_6_66K_HZ:
+    Serial.println("6.66 KHz");
+    break;
+  }
+
+  lsm6ds33.configInt1(false, false, true); // accelerometer DRDY on INT1
+  lsm6ds33.configInt2(false, true, false); // gyro DRDY on INT2
+
+  // Initialize Madgwick filter with update rate
+  filter.begin(10); // 10 Hz
+}
+
+void loop() {
+  unsigned long currentMicros = micros();
+  float deltaTime = (currentMicros - lastUpdate) / 1000000.0f;
+  lastUpdate = currentMicros; 
+
+  FlexValue = analogRead(FlexPin);
+  Serial.print(FlexValue);
+  Serial.print(", ");
+
+  sensors_event_t accel;
+  sensors_event_t gyro;
+  sensors_event_t temp;
+  lsm6ds33.getEvent(&accel, &gyro, &temp);
+
+  float gx = gyro.gyro.x;
+  float gy = gyro.gyro.y;
+  float gz = gyro.gyro.z;
+
+  filter.updateIMU(gx, gy, gz,
+                   accel.acceleration.x,
+                   accel.acceleration.y,
+                   accel.acceleration.z);
+
+  float roll = filter.getRoll();
+  float pitch = filter.getPitch();
+  float yaw = filter.getYaw();
+
+  ble.print(roll);
+  ble.print(", ");
+  ble.print(pitch);
+  ble.print(", ");
+  ble.print(yaw);
+  ble.println();
+
+  Serial.print(roll);
+  Serial.print(", ");
+  Serial.print(pitch);
+  Serial.print(", ");
+  Serial.print(yaw);
+  Serial.print(", ");
+  Serial.println(timeStep);
+  Serial.println();
+
+  timeStep++; 
+
+  // --- Updated buzzer logic ---
+  bool shouldBuzz = false;
+
+  if (FlexValue >= 1800 && FlexValue <= 2100) {
+    shouldBuzz = false;
+    setAllPixelsColor(255, 255, 0);
+    resetGreenPixels();
+  } 
+  else if (FlexValue > 3100) {
+    if (roll < -95 || pitch < -20) {
+      shouldBuzz = true;
+      setAllPixelsColor(255, 0, 0); // All red
+      resetGreenPixels();
+    }
+    if (roll > -95 && roll < -75 && pitch > -20) {
+      shouldBuzz = false;
+      setGreenProgressively();   // Green when not buzzing
+    }
+  }
+
+  digitalWrite(Buzzer, shouldBuzz ? HIGH : LOW);
+}
+
+```
