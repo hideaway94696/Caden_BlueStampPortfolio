@@ -6,12 +6,30 @@ The Knee Rehabilitation Device is a wearable system designed to assist patients 
 |:--:|:--:|:--:|:--:|
 | Caden Y | Mission San Jose High School | Mechanical Engineering | Incoming Sophomore |
 
-<!-- **Replace the BlueStamp logo below with an image of yourself and your completed project. Follow the guide [here](https://tomcam.github.io/least-github-pages/adding-images-github-pages-site.html) if you need help.**
+<img width="845" height="1148" alt="image" src="https://github.com/user-attachments/assets/cf1669dc-503e-4fa8-9225-8a1b2ea448a2" />
 
-![Headstone Image](logo.svg) -->
+# Modifications
+<iframe width="806" height="453" src="https://www.youtube.com/embed/Xnd7YUXufAk" title="Caden Y.  Modification" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Descriptions
+When the user is standing, the LED strip should display yellow, indicating an idle state. When the user is bending down, the LED should turn red, signaling that they haven't yet reached the proper squat angle. Finally, when the user reaches a perfect squat, the LED strip will progressively fill with green, pixel by pixel. This acts as a quick 1-second timer to help the user maintain the squat position for the correct duration.
+
+## Challenges
+One of the main issues I faced while working with the LED strips was getting the green lights to progressively fill the entire strip. After some research, I found that I needed two key functions to make this work: one to turn on the green lights progressively, and another to reset the strip. To light the LEDs progressively, I used the millis() function, which returns the number of milliseconds since the program started. I stored this value in an unsigned long variable (which holds only nonnegative values). Then, I created an if statement that checked two conditions: 1) At least 50 milliseconds had passed since the last update (lastGreenUpdate), and 2) The number of green pixels lit (greenPixelCount) was still less than the total number of pixels (NUM_PIXELS). If both conditions were met, the function would light the next pixel green. I did this by assigning it an RGB value (0, 255, 0), calling strip.show() to update the strip, and then incrementing the counter so the next pixel could be lit on the next pass. To reset the green lights, I first reset the greenPixelCount variable back to zero. Then, I used a for loop to go through each pixel and turn it off by setting its color to black (which is equivalent to RGB = 0, 0, 0). I ended this function with a call to strip.show(), which effectively cleared all the LEDs on the strip. 
+
+While tuning my modifications, I also learned how an LED strip works. First, imagine a strip with 18 NeoPixels. Each pixel has 3 tiny LEDs inside, with the colors red, green, and blue. Each pixel also has its own controller chip which is able to receive data from the Arduino and passes the remaining data along to the next pixel. When I upload my code, the Arduino will send a digital signal that contains the color and brightness data for each pixel in order. Pixel 1 will take the first 3 bytes (R, G, and B), Pixel 2 will take the next 3 bytes, and so on. Each byte contains the information necessary to project a certain color, and contains 8 bits (refer to Figure 3G). A bit is the smallest unit of data in computing, representing a single binary digit (0 or 1).
+
+<img width="999" height="339" alt="image" src="https://github.com/user-attachments/assets/c97042d9-33cc-4e22-a058-d77581d6b088" />
+Figure 4A: 3 Pixels and 8 Bits per Pixel
+
 
 # Final Milestone
 <iframe width="806" height="453" src="https://www.youtube.com/embed/kT8-kyL3Cao" title="Caden Y.  Milestone 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+ 
+## Schematics (With Modifications)
+<img width="845" height="1148" alt="image" src="https://github.com/user-attachments/assets/bef7fa5d-258e-4a2d-97cd-8c4b666f7899" />
+
+Figure 3: Schematics with Modifications (LED Strip)
 
 ## Description
 For my final milestone, the device must function properly, meaning it is able to track incorrect squat form and beep when it is detected. If the user reaches the proper angle of a squat, the buzzer should also be able to beep. I also added my modifications in the final milestone, which is an 18 pixel LED Strip containing three modes. Because of these specific conditions, I met numerous challenges while finishing the project.
@@ -61,11 +79,8 @@ Figure 3F: New Graph of Squat Values
 
 Upon examining the graph, I noticed that the difference between proper and improper squats was minimal (see Figure 3F). To improve accuracy, I decided to isolate a single variable, pitch, yaw, or roll, that showed the most variation. In my case, I chose to focus on roll, since bending the knees inward caused the roll value to change significantly (every improper squat had a difference of around 15-20 degrees). This made it a strong candidate for meaningful analysis. Based on the graph, I set thresholds at its minimums, and after implementing those changes, the system began functioning correctly again. 
 
-After finally tuning my device 
+After finally tuning my device, I had to solder everything together. However, during the process, I encountered a surprisingly difficult obstacle that took me eight hours to resolve. Back in my first milestone, while building the circuit that included both the flex sensor and the accelerometer, I mistakenly believed a 220-ohm resistor was required for the flex sensor. When assembling the circuit, I accidentally grabbed a 10k-ohm resistor instead, and ironically, it turned out to be the perfect match for the circuit to function properly. But later, when soldering everything together, I reverted to my original (incorrect) assumption and used a 220-ohm resistor. This caused the data from the flex sensor to behave erratically. Initially, I suspected the sensor itself was faulty. To verify, I built a simple test circuit and wrote a basic script to check the sensor’s performance. Strangely enough, it worked, mainly because I again coincidentally used a 10k-ohm resistor, thinking it was 220 ohms. With the sensor appearing functional, I shifted focus to the microcontroller. I tried swapping multiple microcontrollers, even using an Arduino Uno, but the flex sensor continued to read data properly. This ruled out the microcontroller as the issue. I then suspected my soldering. I thought perhaps I had shorted something on the PCB. However, after extensive multimeter testing, everything checked out fine. Finally, while taking a break and drinking some water, it occurred to me to double-check the resistor I had used on the breadboard during prototyping. To my surprise, it was a 10k-ohm resistor—not 220 ohms. After experimenting a bit more, I discovered that a 47k-ohm resistor gave even smoother data readings. Replacing the 220-ohm resistor with the 47k-ohm one solved the problem, and the flex sensor finally worked correctly.
 
-I encountered several challenges while working on my modifications. I decided that when the user is standing, the LED strip should display yellow, indicating an idle state. When the user is bending down, the LED should turn red, signaling that they haven't yet reached the proper squat angle. Finally, when the user reaches a perfect squat, the LED strip will progressively fill with green, pixel by pixel. This acts as a quick 1-second timer to help the user maintain the squat position for the correct duration.
-
-One of the main issues I faced while working with the LED strips was getting the green lights to progressively fill the entire strip. After some research, I found that I needed two key functions to make this work: one to turn on the green lights progressively, and another to reset the strip. To light the LEDs progressively, I used the millis() function, which returns the number of milliseconds since the program started. I stored this value in an unsigned long variable (which holds only nonnegative values). Then, I created an if statement that checked two conditions: 1) At least 50 milliseconds had passed since the last update (lastGreenUpdate), and 2) The number of green pixels lit (greenPixelCount) was still less than the total number of pixels (NUM_PIXELS). If both conditions were met, the function would light the next pixel green. I did this by assigning it an RGB value (0, 255, 0), calling strip.show() to update the strip, and then incrementing the counter so the next pixel could be lit on the next pass. To reset the green lights, I first reset the greenPixelCount variable back to zero. Then, I used a for loop to go through each pixel and turn it off by setting its color to black (which is equivalent to RGB = 0, 0, 0). I ended this function with a call to strip.show(), which effectively cleared all the LEDs on the strip. While tuning my modifications, I also learned how an LED strip works. 
 
 # Second Milestone
 
@@ -150,6 +165,7 @@ For my second milestone, I plan to: 1) Integrate Bluetooth functionality so data
 | **220 Ohm Resistor** | **Provides Resistance for Flex Sensor** | **$4** | <a href = "https://www.amazon.com/California-JOS-Resistance-CJ50-004-220/dp/B0BDKQSZHM/ref=sr_1_3?crid=3SFKVJ53VBE4D&dib=eyJ2IjoiMSJ9.pq8IXZtwkjU13efAoUQ01zBUlR2f2Y7f-E16x07ioTKL_3aH4OzxTsM5DaSXBRXLlhDD4Gfyi6ew3fKoaYqDPwQ4kz8UMw4sIKhxX-mOOGXbZIFugasSgq4TqktqYo7m41HoP4MVxl_vrYBUGouW0ZyPQiwjtRqm_j2j1oW8gVs3M8LZa4qfKynQtLAt3V-H_CPBIVkZFBnXwfPXZ-BMyF7bm3BwZMNd3BbPyqMudHuDm3yiBdBZN6r88lAHwf28Ma-If8go4xBKPFicl4GUYWOkP1WMeg0FNymbBulr6Nw.lBNwSGJBYkbV8P0Gi4agY0AZL4zps2b2C3jlE63S4yU&dib_tag=se&keywords=220%2Bohm%2Bresistor&qid=1751558407&s=industrial&sprefix=220%2Bohm%2Bresisto%2Cindustrial%2C128&sr=1-3&th=1"> Link </a> |
 | **Assorted Single-Core Wires** | **Connections for Components** | **$15** | <a href = "https://www.amazon.com/Electrical-7colors-spools-UL1007-breadboard/dp/B083DN5R61/ref=asc_df_B083DN5R61/?tag=hyprod-20&linkCode=df0&hvadid=692875362841&hvpos=&hvnetw=g&hvrand=8530834579962313816&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9032183&hvtargid=pla-2281435179978&psc=1&mcid=8b897963727d312e9a95e09793193a56&hvocijid=8530834579962313816-B083DN5R61-&hvexpln=73&gad_source=1"> Link </a> | 
 | **PCB Board** | **Holds all Parts** | **$10** | <a href = "https://www.amazon.com/ELEGOO-Prototype-Soldering-Compatible-Arduino/dp/B072Z7Y19F/ref=sr_1_fkmr0_1?crid=18FRQ5Z77CLN3&dib=eyJ2IjoiMSJ9.cFO3IbuqDHBg13mO-bkEuDZt4D5ArS6wMFfqDWRiL40.8EixwzeL0N95GaD5v3ouxOydzFTpfyCVcRnI53u4MqE&dib_tag=se&keywords=proto+board+10xX&qid=1720637134&sprefix=proto+board+10xx%2Caps%2C126&sr=8-1-fkmr0"> Link </a> |
+| **LED Strip** | **Displays Colors and serves as an Alternative 'Buzzer' | **$9** | <a href = "https://www.amazon.com/BTF-LIGHTING-WS2812B1M60LB30-BTF-LIGHTING-WS2812B-IC-RGB-5050SMD-Pure-Gold-Individual-Addressable-LED-Strip-High-Quality-3-28FT-60LED-60LED-m-Flexible-Full-Color-IP30-DC5V-for-DIY-Chasing-Color-Project-No-Adapter-or-Controller/dp/B01CDTED80/ref=asc_df_B01CDTED80?mcid=aab6f3a36a97389abee1397380f9f389&hvocijid=16232621854761171541-B01CDTED80-&hvexpln=73&tag=hyprod-20&linkCode=df0&hvadid=721245378154&hvpos=&hvnetw=g&hvrand=16232621854761171541&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9032171&hvtargid=pla-2281435178298&th=1"> Link </a> |
 
 
 # Starter Project
@@ -722,59 +738,52 @@ void loop() {
 
 ## Modifications Code
 ```cpp
-#include <Adafruit_LSM6DS33.h>        //
-#include <BleSerial.h>                //
-#include <Adafruit_Sensor.h>          //
-#include <Wire.h>                     //
-#include <MadgwickAHRS.h>             //
-#include <math.h>                     //
-#include <Adafruit_NeoPixel.h>
+// --- Library Includes ---
+#include <Adafruit_LSM6DS33.h>        // IMU sensor (accelerometer + gyroscope)
+#include <BleSerial.h>                // Bluetooth communication via serial
+#include <Adafruit_Sensor.h>          // Base class for sensors
+#include <Wire.h>                     // I2C communication
+#include <MadgwickAHRS.h>             // Sensor fusion algorithm for orientation
+#include <math.h>                     // Math functions
+#include <Adafruit_NeoPixel.h>        // LED strip control
 
-#define LED_PIN        12
-#define NUM_PIXELS     18
+// --- LED Strip Configuration ---
+#define LED_PIN        12             // Pin for NeoPixel data line
+#define NUM_PIXELS     18             // Number of pixels in the LED strip
 Adafruit_NeoPixel strip(NUM_PIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
+// --- Utility Function: Floating Point Comparison ---
 bool approxEqual(float a, float b, float tol=0.5) {
-  return fabs(a - b) < tol;
+  return fabs(a - b) < tol;           // Returns true if values are within tolerance
 }
 
-Adafruit_LSM6DS33 lsm6ds33 {};
-BleSerial ble;
-Madgwick filter;
-//Adafruit_NeoPixel strip(NUM_PIXELS, PIN, NEO_GRB + NEO_KHZ800);
+// --- Sensor & Communication Objects ---
+Adafruit_LSM6DS33 lsm6ds33 {};       // LSM6DS33 IMU instance
+BleSerial ble;                        // Bluetooth Serial instance
+Madgwick filter;                      // Sensor fusion filter
 
-const int FlexPin = 35;
-const int Buzzer = 23;
-int FlexValue = 0;
-unsigned long lastUpdate = 0;
-unsigned long timeStep = 0; 
-unsigned long lastGreenUpdate = 0;
-int greenPixelCount = NUM_PIXELS;
+// --- Pin Definitions ---
+const int FlexPin = 35;               // Analog pin for flex sensor
+const int Buzzer = 23;                // Digital output for buzzer
 
+// --- State Variables ---
+int FlexValue = 0;                    // Latest value from flex sensor
+unsigned long lastUpdate = 0;        // Last timestamp for IMU update
+unsigned long timeStep = 0;          // Loop iteration counter
+unsigned long lastGreenUpdate = 0;   // Time since last green LED update
+int greenPixelCount = NUM_PIXELS;    // Counter for progressive green LED effect
+
+// --- LED Control Functions ---
+
+// Set all LEDs to the same RGB color (inefficient hard-coded version)
 void setLEDColor(uint8_t r, uint8_t g, uint8_t b) {
-  strip.setPixelColor(0, strip.Color(r, g, b));
-  strip.setPixelColor(1, strip.Color(r, g, b));
-  strip.setPixelColor(2, strip.Color(r, g, b));
-  strip.setPixelColor(3, strip.Color(r, g, b));
-  strip.setPixelColor(4, strip.Color(r, g, b));
-  strip.setPixelColor(5, strip.Color(r, g, b));
-  strip.setPixelColor(6, strip.Color(r, g, b));
-  strip.setPixelColor(7, strip.Color(r, g, b));
-  strip.setPixelColor(8, strip.Color(r, g, b));
-  strip.setPixelColor(9, strip.Color(r, g, b));
-  strip.setPixelColor(10, strip.Color(r, g, b));
-  strip.setPixelColor(11, strip.Color(r, g, b));
-  strip.setPixelColor(12, strip.Color(r, g, b));
-  strip.setPixelColor(13, strip.Color(r, g, b));
-  strip.setPixelColor(14, strip.Color(r, g, b));
-  strip.setPixelColor(15, strip.Color(r, g, b));
-  strip.setPixelColor(16, strip.Color(r, g, b));
-  strip.setPixelColor(17, strip.Color(r, g, b));
-  strip.setPixelColor(18, strip.Color(r, g, b));
+  for (int i = 0; i < NUM_PIXELS; i++) {
+    strip.setPixelColor(i, strip.Color(r, g, b));
+  }
   strip.show();
 }
 
-
+// Efficiently sets all pixels to the specified RGB color
 void setAllPixelsColor(uint8_t r, uint8_t g, uint8_t b) {
   for (int i = 0; i < NUM_PIXELS; i++) {
     strip.setPixelColor(i, strip.Color(r, g, b));
@@ -782,6 +791,7 @@ void setAllPixelsColor(uint8_t r, uint8_t g, uint8_t b) {
   strip.show();
 }
 
+// Light up LEDs one-by-one in green, simulating a progressive effect
 void setGreenProgressively() {
   unsigned long now = millis();
   if (now - lastGreenUpdate >= 50 && greenPixelCount < NUM_PIXELS) {
@@ -792,243 +802,164 @@ void setGreenProgressively() {
   }
 }
 
+// Reset all LEDs to off and restart green animation
 void resetGreenPixels() {
   greenPixelCount = 0;
   for (int i = 0; i < NUM_PIXELS; i++) {
-    strip.setPixelColor(i, 0); // clear
+    strip.setPixelColor(i, 0); // turn off
   }
   strip.show();
 }
 
-
+// --- Setup Function ---
 void setup(void) {
   Serial.begin(115200);
-  ble.begin("Values");
+  ble.begin("Values");                // Start BLE with name "Values"
   pinMode(FlexPin, INPUT);
   pinMode(Buzzer, OUTPUT);
 
   strip.begin();
-  strip.setBrightness(50); // Adjust if needed
-  setLEDColor(0, 255, 0);  // Start with green (no buzz)
+  strip.setBrightness(50);           // Set LED brightness (0–255)
+  setLEDColor(0, 255, 0);            // Start with green LEDs
 
+  // Wait for serial connection (useful on boards like Leonardo)
   while (!Serial)
-    delay(10); // will pause Zero, Leonardo, etc until serial console opens
+    delay(10);                       
 
   Serial.println("Adafruit LSM6DS33 test!");
 
+  // Initialize I2C with custom SDA/SCL pins (e.g., on ESP32)
   Wire.begin(21, 22);
+
+  // Scan I2C bus for connected devices
   for(int i = 0; i <= 127; i ++) {
     Wire.beginTransmission(i);
     if(!Wire.endTransmission()){
-      Serial.print("device found");
-      Serial.print(i);
-      Serial.println();
+      Serial.print("Device found at address: ");
+      Serial.println(i);
     }
   }
-  
 
-  if (lsm6ds33.begin_I2C()) {
-    // if (!lsm6ds33.begin_SPI(LSM_CS)) {
-    // if (!lsm6ds33.begin_SPI(LSM_CS, LSM_SCK, LSM_MISO, LSM_MOSI)) {
+  // Initialize IMU sensor over I2C
+  if (!lsm6ds33.begin_I2C()) {
     Serial.println("Failed to find LSM6DS33 chip");
-    while (1) {
-      delay(10);
-    }
+    while (1) delay(10);
   }
-
   Serial.println("LSM6DS33 Found!");
 
-  // lsm6ds33.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);
-  Serial.print("Accelerometer range set to: ");
+  // Configure accelerometer range
   lsm6ds33.setAccelRange(LSM6DS_ACCEL_RANGE_16_G);
+  Serial.print("Accelerometer range set to: ");
   switch (lsm6ds33.getAccelRange()) {
-  case LSM6DS_ACCEL_RANGE_2_G:
-    Serial.println("+-2G");
-    break;
-  case LSM6DS_ACCEL_RANGE_4_G:
-    Serial.println("+-4G");
-    break;
-  case LSM6DS_ACCEL_RANGE_8_G:
-    Serial.println("+-8G");
-    break;
-  case LSM6DS_ACCEL_RANGE_16_G:
-    Serial.println("+-16G");
-    break;
+    case LSM6DS_ACCEL_RANGE_2_G: Serial.println("±2G"); break;
+    case LSM6DS_ACCEL_RANGE_4_G: Serial.println("±4G"); break;
+    case LSM6DS_ACCEL_RANGE_8_G: Serial.println("±8G"); break;
+    case LSM6DS_ACCEL_RANGE_16_G: Serial.println("±16G"); break;
   }
 
-  // lsm6ds33.setGyroRange(LSM6DS_GYRO_RANGE_250_DPS);
-  Serial.print("Gyro range set to: ");
+  // Configure gyroscope range
   lsm6ds33.setGyroRange(LSM6DS_GYRO_RANGE_2000_DPS);
+  Serial.print("Gyro range set to: ");
   switch (lsm6ds33.getGyroRange()) {
-  case LSM6DS_GYRO_RANGE_125_DPS:
-    Serial.println("125 degrees/s");
-    break;
-  case LSM6DS_GYRO_RANGE_250_DPS:
-    Serial.println("250 degrees/s");
-    break;
-  case LSM6DS_GYRO_RANGE_500_DPS:
-    Serial.println("500 degrees/s");
-    break;
-  case LSM6DS_GYRO_RANGE_1000_DPS:
-    Serial.println("1000 degrees/s");
-    break;
-  case LSM6DS_GYRO_RANGE_2000_DPS:
-    Serial.println("2000 degrees/s");
-    break;
-  case ISM330DHCX_GYRO_RANGE_4000_DPS:
-    break; // unsupported range for the DS33
+    case LSM6DS_GYRO_RANGE_125_DPS: Serial.println("125 dps"); break;
+    case LSM6DS_GYRO_RANGE_250_DPS: Serial.println("250 dps"); break;
+    case LSM6DS_GYRO_RANGE_500_DPS: Serial.println("500 dps"); break;
+    case LSM6DS_GYRO_RANGE_1000_DPS: Serial.println("1000 dps"); break;
+    case LSM6DS_GYRO_RANGE_2000_DPS: Serial.println("2000 dps"); break;
   }
 
-  // lsm6ds33.setAccelDataRate(LSM6DS_RATE_12_5_HZ);
-  Serial.print("Accelerometer data rate set to: ");
+  // Configure accelerometer data rate
   lsm6ds33.setAccelDataRate(LSM6DS_RATE_52_HZ);
+  Serial.print("Accelerometer data rate set to: ");
+  // Print readable data rate
   switch (lsm6ds33.getAccelDataRate()) {
-  case LSM6DS_RATE_SHUTDOWN:
-    Serial.println("0 Hz");
-    break;
-  case LSM6DS_RATE_12_5_HZ:
-    Serial.println("12.5 Hz");
-    break;
-  case LSM6DS_RATE_26_HZ:
-    Serial.println("26 Hz");
-    break;
-  case LSM6DS_RATE_52_HZ:
-    Serial.println("52 Hz");
-    break;
-  case LSM6DS_RATE_104_HZ:
-    Serial.println("104 Hz");
-    break;
-  case LSM6DS_RATE_208_HZ:
-    Serial.println("208 Hz");
-    break;
-  case LSM6DS_RATE_416_HZ:
-    Serial.println("416 Hz");
-    break;
-  case LSM6DS_RATE_833_HZ:
-    Serial.println("833 Hz");
-    break;
-  case LSM6DS_RATE_1_66K_HZ:
-    Serial.println("1.66 KHz");
-    break;
-  case LSM6DS_RATE_3_33K_HZ:
-    Serial.println("3.33 KHz");
-    break;
-  case LSM6DS_RATE_6_66K_HZ:
-    Serial.println("6.66 KHz");
-    break;
+    case LSM6DS_RATE_52_HZ: Serial.println("52 Hz"); break;
+    // Add other cases if needed
   }
 
-  // lsm6ds33.setGyroDataRate(LSM6DS_RATE_12_5_HZ);
-  Serial.print("Gyro data rate set to: ");
+  // Configure gyroscope data rate
   lsm6ds33.setGyroDataRate(LSM6DS_RATE_6_66K_HZ);
+  Serial.print("Gyro data rate set to: ");
   switch (lsm6ds33.getGyroDataRate()) {
-  case LSM6DS_RATE_SHUTDOWN:
-    Serial.println("0 Hz");
-    break;
-  case LSM6DS_RATE_12_5_HZ:
-    Serial.println("12.5 Hz");
-    break;
-  case LSM6DS_RATE_26_HZ:
-    Serial.println("26 Hz");
-    break;
-  case LSM6DS_RATE_52_HZ:
-    Serial.println("52 Hz");
-    break;
-  case LSM6DS_RATE_104_HZ:
-    Serial.println("104 Hz");
-    break;
-  case LSM6DS_RATE_208_HZ:
-    Serial.println("208 Hz");
-    break;
-  case LSM6DS_RATE_416_HZ:
-    Serial.println("416 Hz");
-    break;
-  case LSM6DS_RATE_833_HZ:
-    Serial.println("833 Hz");
-    break;
-  case LSM6DS_RATE_1_66K_HZ:
-    Serial.println("1.66 KHz");
-    break;
-  case LSM6DS_RATE_3_33K_HZ:
-    Serial.println("3.33 KHz");
-    break;
-  case LSM6DS_RATE_6_66K_HZ:
-    Serial.println("6.66 KHz");
-    break;
+    case LSM6DS_RATE_6_66K_HZ: Serial.println("6.66 KHz"); break;
+    // Add other cases if needed
   }
 
-  lsm6ds33.configInt1(false, false, true); // accelerometer DRDY on INT1
-  lsm6ds33.configInt2(false, true, false); // gyro DRDY on INT2
+  // Enable interrupt data ready lines
+  lsm6ds33.configInt1(false, false, true); // Accelerometer DRDY
+  lsm6ds33.configInt2(false, true, false); // Gyroscope DRDY
 
-  // Initialize Madgwick filter with update rate
-  filter.begin(10); // 10 Hz
+  // Initialize Madgwick filter with update frequency (Hz)
+  filter.begin(10); 
 }
 
+// --- Main Loop ---
 void loop() {
+  // Calculate time difference since last IMU update
   unsigned long currentMicros = micros();
   float deltaTime = (currentMicros - lastUpdate) / 1000000.0f;
-  lastUpdate = currentMicros; 
+  lastUpdate = currentMicros;
 
+  // Read flex sensor
   FlexValue = analogRead(FlexPin);
   Serial.print(FlexValue);
   Serial.print(", ");
 
-  sensors_event_t accel;
-  sensors_event_t gyro;
-  sensors_event_t temp;
+  // Read IMU sensor data
+  sensors_event_t accel, gyro, temp;
   lsm6ds33.getEvent(&accel, &gyro, &temp);
 
+  // Get raw gyro values
   float gx = gyro.gyro.x;
   float gy = gyro.gyro.y;
   float gz = gyro.gyro.z;
 
+  // Sensor fusion update
   filter.updateIMU(gx, gy, gz,
                    accel.acceleration.x,
                    accel.acceleration.y,
                    accel.acceleration.z);
 
+  // Get orientation angles
   float roll = filter.getRoll();
   float pitch = filter.getPitch();
   float yaw = filter.getYaw();
 
-  ble.print(roll);
-  ble.print(", ");
-  ble.print(pitch);
-  ble.print(", ");
-  ble.print(yaw);
-  ble.println();
+  // Send orientation via Bluetooth
+  ble.print(roll); ble.print(", ");
+  ble.print(pitch); ble.print(", ");
+  ble.print(yaw); ble.println();
 
-  Serial.print(roll);
-  Serial.print(", ");
-  Serial.print(pitch);
-  Serial.print(", ");
-  Serial.print(yaw);
-  Serial.print(", ");
-  Serial.println(timeStep);
-  Serial.println();
+  // Print debug info to serial
+  Serial.print(roll); Serial.print(", ");
+  Serial.print(pitch); Serial.print(", ");
+  Serial.print(yaw); Serial.print(", ");
+  Serial.println(timeStep); Serial.println();
+  timeStep++;
 
-  timeStep++; 
-
-  // --- Updated buzzer logic ---
+  // --- Buzzer + LED Feedback Logic ---
   bool shouldBuzz = false;
 
   if (FlexValue >= 1800 && FlexValue <= 2100) {
+    // Mid flex: yellow LED, no buzzer
     shouldBuzz = false;
-    setAllPixelsColor(255, 255, 0);
+    setAllPixelsColor(255, 255, 0); // Yellow
     resetGreenPixels();
   } 
   else if (FlexValue > 3100) {
+    // High flex value
     if (roll < -95 || pitch < -20) {
       shouldBuzz = true;
-      setAllPixelsColor(255, 0, 0); // All red
+      setAllPixelsColor(255, 0, 0); // Red
       resetGreenPixels();
-    }
-    if (roll > -95 && roll < -75 && pitch > -20) {
+    } else if (roll > -95 && roll < -75 && pitch > -20) {
+      // Valid range: progressive green LEDs
       shouldBuzz = false;
-      setGreenProgressively();   // Green when not buzzing
+      setGreenProgressively();
     }
   }
 
+  // Activate or deactivate buzzer
   digitalWrite(Buzzer, shouldBuzz ? HIGH : LOW);
 }
 
