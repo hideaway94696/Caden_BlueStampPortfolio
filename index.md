@@ -27,7 +27,7 @@ Figure 4A: 3 Pixels and 8 Bits per Pixel
 <iframe width="806" height="453" src="https://www.youtube.com/embed/kT8-kyL3Cao" title="Caden Y.  Milestone 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
  
 ## Schematics (With Modifications)
-<img width="845" height="1148" alt="image" src="https://github.com/user-attachments/assets/bef7fa5d-258e-4a2d-97cd-8c4b666f7899" />
+<img width="1225" height="984" alt="image" src="https://github.com/user-attachments/assets/c1e8b089-3bf5-429e-8dc1-95c0abda0f1d" />
 
 Figure 3: Schematics with Modifications (LED Strip)
 
